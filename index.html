@@ -274,6 +274,199 @@
       </div>
     </section>
 
+    <section data-tela="servico-e-profissional" class="hidden">
+      <div class="max-w-4xl mx-auto space-y-6">
+        <!-- Breadcrumb / Contexto -->
+        <nav class="flex items-center gap-2 text-sm text-gray-400 fade-in">
+          <button onclick="mostrarTela('servicos-e-horarios')" class="hover:text-marca-700 transition-colors">Serviços</button>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <span class="text-marca-700 font-medium">Profissional</span>
+        </nav>
+
+        <!-- Detalhes do Serviço -->
+        <div id="svc-detalhe-card" class="card p-6 fade-in">
+          <div class="flex flex-col sm:flex-row gap-5">
+            <div class="w-16 h-16 rounded-2xl bg-marca-100 flex items-center justify-center flex-shrink-0">
+              <svg class="w-8 h-8 text-marca-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                <h2 class="text-xl font-bold text-gray-900" id="svc-nome">Corte Masculino</h2>
+                <span class="badge badge-info" id="svc-categoria">Cabelo</span>
+              </div>
+              <p class="text-gray-500 text-sm leading-relaxed mb-4" id="svc-descricao">Corte personalizado com análise de formato de rosto, lavagem inclusiva, finalização com pomada modeladora e toalha quente. Inclui consulta de estilo com o profissional.</p>
+              <div class="flex flex-wrap items-center gap-4">
+                <div class="flex items-center gap-1.5 text-gray-700">
+                  <svg class="w-5 h-5 text-marca-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  <span class="font-semibold" id="svc-duracao">45 min</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-gray-700">
+                  <svg class="w-5 h-5 text-marca-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  <span class="font-bold text-lg text-marca-700" id="svc-valor">R$ 65,00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seletor de Profissional -->
+        <div class="fade-in">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-lg font-bold text-gray-900">Escolha o Profissional</h3>
+              <p class="text-sm text-gray-400 mt-0.5">Selecione quem realizará seu atendimento</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="relative">
+                <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input type="text" id="prof-busca" placeholder="Buscar profissional..." class="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-marca-500/30 focus:border-marca-500 transition-all w-56" oninput="servico_e_profissional_filtrar(this.value)">
+              </div>
+              <select id="prof-ordem" onchange="servico_e_profissional_ordenar(this.value)" class="text-sm border border-gray-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-marca-500/30 focus:border-marca-500 transition-all text-gray-600 bg-white cursor-pointer">
+                <option value="avaliacao">Melhor avaliação</option>
+                <option value="nome">Nome A-Z</option>
+                <option value="experiencia">Mais experiente</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="profissionais-lista" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          </div>
+
+          <div id="prof-vazio" class="hidden text-center py-16">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
+              <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+            <p class="text-gray-400 text-sm">Nenhum profissional encontrado</p>
+            <p class="text-gray-300 text-xs mt-1">Tente outro termo de busca</p>
+          </div>
+        </div>
+
+        <!-- Ações do Rodapé -->
+        <div class="flex flex-col-reverse sm:flex-row items-center justify-between gap-4 pt-4 pb-8 fade-in">
+          <button onclick="mostrarTela('servicos-e-horarios')" class="w-full sm:w-auto px-6 py-3 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-xl transition-all text-sm font-medium flex items-center justify-center gap-2 active:scale-95">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            Voltar para serviços
+          </button>
+          <button onclick="servico_e_profissional_continuar()" id="btn-continuar-prof" class="btn btn-primary px-8 py-3 text-base flex items-center gap-2 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100" disabled>
+            Continuar
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+    <script>
+    (function(){
+      const profissionais = [
+        { id: 1, nome: 'Ana Carolina', apelido: 'Ana', especialidade: 'Coloração e Mechas', rating: 4.9, avaliacoes: 234, experiencia: 7, precoSinal: 'A partir de R$ 15', cor: 'bg-rose-500', corLetra: 'text-rose-500', disponivel: true, bio: 'Especialista em coloração avançada e mechas. Premiada no Congresso de Beleza 2023.' },
+        { id: 2, nome: 'Carlos Eduardo', apelido: 'Carlos', especialidade: 'Cortes Masculinos', rating: 4.8, avaliacoes: 312, experiencia: 10, precoSinal: 'A partir de R$ 10', cor: 'bg-blue-500', corLetra: 'text-blue-500', disponivel: true, bio: 'Referência em cortes masculinos clássicos e modernos. Mais de 10 anos de experiência.' },
+        { id: 3, nome: 'Fernando Lima', apelido: 'Fernando', especialidade: 'Barba e Acabamento', rating: 4.7, avaliacoes: 189, experiencia: 5, precoSinal: 'A partir de R$ 8', cor: 'bg-amber-500', corLetra: 'text-amber-500', disponivel: true, bio: 'Mestre em barbas e acabamentos. Treinado em Londres na Traditional Shaving School.' },
+        { id: 4, nome: 'Mariana Costa', apelido: 'Mari', especialidade: 'Tratamentos Capilares', rating: 4.9, avaliacoes: 156, experiencia: 8, precoSinal: 'A partir de R$ 20', cor: 'bg-emerald-500', corLetra: 'text-emerald-500', disponivel: true, bio: 'Trichologista formada. Especialista em reconstrução e hidratação profunda.' },
+        { id: 5, nome: 'Luis Felipe', apelido: 'Luís', especialidade: 'Cortes Criativos', rating: 4.6, avaliacoes: 97, experiencia: 3, precoSinal: 'A partir de R$ 12', cor: 'bg-purple-500', corLetra: 'text-purple-500', disponivel: true, bio: 'Jovem talento especializado em cortes criativos e undercuts. Estilo moderno e ousado.' },
+        { id: 6, nome: 'Patrícia Mendes', apelido: 'Patrícia', especialidade: 'Design de Sobrancelhas', rating: 4.8, avaliacoes: 278, experiencia: 6, precoSinal: 'A partir de R$ 18', cor: 'bg-pink-500', corLetra: 'text-pink-500', disponivel: true, bio: 'Designer de sobrancelhas e pigmentação. Referência na técnica de fio a fio.' }
+      ];
+      let profissionalSelecionado = null;
+
+      function estrelas(rating){
+        let html = '';
+        for(let i = 1; i <= 5; i++){
+          if(i <= Math.floor(rating)){
+            html += '<svg class="w-4 h-4 text-amber-400 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
+          } else if(i - 0.5 <= rating){
+            html += '<svg class="w-4 h-4 text-amber-400" viewBox="0 0 20 20" fill="currentColor"><defs><linearGradient id="half"><stop offset="50%" stop-color="currentColor"/><stop offset="50%" stop-color="#D1D5DB"/></linearGradient></defs><path fill="url(#half)" d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
+          } else {
+            html += '<svg class="w-4 h-4 text-gray-200" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
+          }
+        }
+        return html;
+      }
+
+      function iniciais(nome){
+        const parts = nome.split(' ');
+        return (parts[0][0] + (parts.length > 1 ? parts[parts.length-1][0] : '')).toUpperCase();
+      }
+
+      function renderProfissionais(lista){
+        const container = document.getElementById('profissionais-lista');
+        const vazio = document.getElementById('prof-vazio');
+        if(lista.length === 0){
+          container.classList.add('hidden');
+          vazio.classList.remove('hidden');
+          return;
+        }
+        container.classList.remove('hidden');
+        vazio.classList.add('hidden');
+        container.innerHTML = lista.map(function(p){
+          const selecionado = profissionalSelecionado === p.id;
+          const borderClass = selecionado ? 'border-marca-500 ring-2 ring-marca-500/20' : 'border-gray-100 hover:border-gray-200 hover:shadow-md';
+          const checkCircle = selecionado ? '<div class="w-5 h-5 rounded-full bg-marca-700 flex items-center justify-center flex-shrink-0"><svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div>' : '<div class="w-5 h-5 rounded-full border-2 border-gray-300 flex-shrink-0"></div>';
+          return '<div class="card p-5 cursor-pointer transition-all duration-200 ' + borderClass + '" onclick="servico_e_profissional_selecionar(' + p.id + ')">' +
+            '<div class="flex items-start gap-4">' +
+              '<div class="relative flex-shrink-0">' +
+                '<div class="w-14 h-14 rounded-full ' + p.cor + ' flex items-center justify-center text-white font-bold text-lg">' + iniciais(p.nome) + '</div>' +
+                (p.disponivel ? '<span class="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-400 border-2 border-white rounded-full"></span>' : '<span class="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-gray-300 border-2 border-white rounded-full"></span>') +
+              '</div>' +
+              '<div class="flex-1 min-w-0">' +
+                '<div class="flex items-center gap-2 mb-0.5">' +
+                  '<h4 class="font-bold text-gray-900 truncate">' + p.nome + '</h4>' +
+                  '<span class="badge badge-success text-xs py-0.5 px-2">Disponível</span>' +
+                '</div>' +
+                '<p class="text-sm text-marca-700 font-medium mb-1">' + p.especialidade + '</p>' +
+                '<div class="flex items-center gap-1 mb-1.5">' + estrelas(p.rating) + '<span class="text-xs text-gray-500 ml-1">' + p.rating.toFixed(1) + ' (' + p.avaliacoes + ')</span></div>' +
+                '<p class="text-xs text-gray-400">' + p.experiencia + ' anos de experiência · ' + p.precoSinal + '</p>' +
+              '</div>' +
+              '<div class="mt-1">' + checkCircle + '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      }
+
+      window.servico_e_profissional_selecionar = function(id){
+        profissionalSelecionado = id;
+        const btn = document.getElementById('btn-continuar-prof');
+        btn.disabled = false;
+        const p = profissionais.find(function(x){ return x.id === id; });
+        if(p) toast('Profissional selecionado: ' + p.nome, 'ok');
+        const busca = document.getElementById('prof-busca').value;
+        servico_e_profissual_filtrar_lista(busca);
+      };
+
+      window.servico_e_profissional_filtrar = function(termo){
+        servico_e_profissual_filtrar_lista(termo);
+      };
+
+      function servico_e_profissual_filtrar_lista(termo){
+        const ordem = document.getElementById('prof-ordem').value;
+        let lista = profissionais.filter(function(p){
+          const t = termo.toLowerCase();
+          return p.nome.toLowerCase().includes(t) || p.especialidade.toLowerCase().includes(t);
+        });
+        if(ordem === 'avaliacao') lista.sort(function(a,b){ return b.rating - a.rating; });
+        else if(ordem === 'nome') lista.sort(function(a,b){ return a.nome.localeCompare(b.nome); });
+        else if(ordem === 'experiencia') lista.sort(function(a,b){ return b.experiencia - a.experiencia; });
+        renderProfissionais(lista);
+      }
+
+      window.servico_e_profissional_ordenar = function(ordem){
+        const termo = document.getElementById('prof-busca').value;
+        servico_e_profissual_filtrar_lista(termo);
+      };
+
+      window.servico_e_profissional_continuar = function(){
+        if(!profissionalSelecionado){ toast('Selecione um profissional para continuar.', 'erro'); return; }
+        const p = profissionais.find(function(x){ return x.id === profissionalSelecionado; });
+        if(p){
+          try { sessionStorage.setItem('agendamento_profissional_nome', p.nome); } catch(e){}
+          try { sessionStorage.setItem('agendamento_profissional_id', p.id); } catch(e){}
+        }
+        toast('Profissional confirmado: ' + p.nome, 'ok');
+        setTimeout(function(){ mostrarTela('data-e-horario'); }, 200);
+      };
+
+      profissionalSelecionado = null;
+      renderProfissionais(profissionais);
+    })();
+    </script>
+
     <!-- TELAS -->
         </div>
       </main>
