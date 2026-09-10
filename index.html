@@ -1710,6 +1710,344 @@
       </script>
     </section>
 
+    <section data-tela="clientes" class="hidden">
+  <div class="fade-in space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900 font-display flex items-center gap-3">
+          Clientes
+          <span id="badge-total-clientes" class="badge bg-marca-100 text-marca-700 text-sm font-semibold px-3 py-1 rounded-full">12</span>
+        </h1>
+        <p class="text-gray-500 mt-1 text-sm">Gerencie sua base de clientes e visualize o histórico de agendamentos</p>
+      </div>
+      <button onclick="abrirModalClientes()" class="btn bg-marca-600 hover:bg-marca-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 active:scale-95 flex items-center gap-2 self-start">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        Novo Cliente
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="card bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">Total</p>
+            <p id="stat-total" class="text-2xl font-bold text-gray-900 mt-1 font-display">12</p>
+          </div>
+          <div class="w-10 h-10 rounded-xl bg-marca-50 flex items-center justify-center">
+            <svg class="w-5 h-5 text-marca-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">Ativos</p>
+            <p id="stat-ativos" class="text-2xl font-bold text-green-600 mt-1 font-display">10</p>
+          </div>
+          <div class="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center">
+            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">Inativos</p>
+            <p id="stat-inativos" class="text-2xl font-bold text-gray-400 mt-1 font-display">2</p>
+          </div>
+          <div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center">
+            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-xs font-medium text-gray-400 uppercase tracking-wider">Novos (30d)</p>
+            <p id="stat-novos" class="text-2xl font-bold text-blue-600 mt-1 font-display">3</p>
+          </div>
+          <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
+            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+      <div class="p-5 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center gap-3">
+        <div class="relative flex-1 max-w-md">
+          <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input id="busca-clientes" type="text" placeholder="Buscar por nome ou telefone..." oninput="clientes_buscar(this.value)" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 focus:border-marca-400 focus:ring-2 focus:ring-marca-100 outline-none transition-all text-sm" />
+        </div>
+        <div class="flex items-center gap-2">
+          <select id="filtro-status" onchange="clientes_buscar(document.getElementById('busca-clientes').value)" class="text-sm rounded-xl border border-gray-200 focus:border-marca-400 focus:ring-2 focus:ring-marca-100 outline-none px-3 py-2.5 transition-all bg-white cursor-pointer">
+            <option value="todos">Todos os status</option>
+            <option value="ativo">Ativos</option>
+            <option value="inativo">Inativos</option>
+          </select>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-gray-50/80">
+              <th class="text-left px-5 py-3.5 font-semibold text-gray-500 text-xs uppercase tracking-wider">Cliente</th>
+              <th class="text-left px-5 py-3.5 font-semibold text-gray-500 text-xs uppercase tracking-wider">Telefone</th>
+              <th class="text-left px-5 py-3.5 font-semibold text-gray-500 text-xs uppercase tracking-wider">WhatsApp</th>
+              <th class="text-left px-5 py-3.5 font-semibold text-gray-500 text-xs uppercase tracking-wider">Último Atend.</th>
+              <th class="text-left px-5 py-3.5 font-semibold text-gray-500 text-xs uppercase tracking-wider">Agendamentos</th>
+              <th class="text-left px-5 py-3.5 font-semibold text-gray-500 text-xs uppercase tracking-wider">Status</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-clientes-body" class="divide-y divide-gray-50"></tbody>
+        </table>
+      </div>
+      <div id="estado-vazio-clientes" class="hidden p-12 text-center">
+        <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <p class="text-gray-500 font-medium">Nenhum cliente encontrado</p>
+        <p class="text-gray-400 text-sm mt-1">Tente ajustar sua busca ou filtros</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const CORES_INICIAIS = ['bg-rose-400','bg-amber-400','bg-emerald-400','bg-sky-400','bg-violet-400','bg-pink-400','bg-teal-400','bg-orange-400','bg-indigo-400','bg-cyan-400','bg-lime-400','bg-fuchsia-400'];
+
+  let clientes = [
+    { id: 1, nome: 'Maria Fernanda Costa', telefone: '(11) 98765-4321', whatsapp: true, email: 'maria.costa@email.com', ultimoAtendimento: '2025-01-15', totalAgendamentos: 24, status: 'ativo', observacoes: 'Prefere horários pela manhã. Alérgica a látex.', dataCadastro: '2024-03-10' },
+    { id: 2, nome: 'João Pedro Oliveira', telefone: '(11) 91234-5678', whatsapp: true, email: 'joao.oliveira@email.com', ultimoAtendimento: '2025-01-18', totalAgendamentos: 15, status: 'ativo', observacoes: 'Cliente fiel, sempre pontual.', dataCadastro: '2024-05-22' },
+    { id: 3, nome: 'Ana Beatriz Souza', telefone: '(21) 99876-5432', whatsapp: false, email: 'ana.souza@email.com', ultimoAtendimento: '2024-12-05', totalAgendamentos: 8, status: 'ativo', observacoes: 'Gosta de ouvir música durante o atendimento.', dataCadastro: '2024-07-14' },
+    { id: 4, nome: 'Carlos Eduardo Lima', telefone: '(11) 97654-3210', whatsapp: true, email: 'carlos.lima@email.com', ultimoAtendimento: '2024-11-20', totalAgendamentos: 31, status: 'ativo', observacoes: 'VIP — cliente desde a inauguração.', dataCadastro: '2024-01-05' },
+    { id: 5, nome: 'Juliana Marques Ribeiro', telefone: '(31) 98765-1234', whatsapp: true, email: 'juliana.ribeiro@email.com', ultimoAtendimento: '2025-01-10', totalAgendamentos: 12, status: 'ativo', observacoes: '', dataCadastro: '2024-08-30' },
+    { id: 6, nome: 'Ricardo André Santos', telefone: '(11) 96543-2109', whatsapp: false, email: 'ricardo.santos@email.com', ultimoAtendimento: '2024-09-15', totalAgendamentos: 5, status: 'inativo', observacoes: 'Não compareceu aos últimos 2 agendamentos.', dataCadastro: '2024-06-18' },
+    { id: 7, nome: 'Patrícia Helena Ferreira', telefone: '(41) 99876-7654', whatsapp: true, email: 'patricia.ferreira@email.com', ultimoAtendimento: '2025-01-12', totalAgendamentos: 19, status: 'ativo', observacoes: 'Tem pressão arterial baixa — avisar antes de procedimentos.', dataCadastro: '2024-04-02' },
+    { id: 8, nome: 'Fernando Luís Almeida', telefone: '(11) 95432-1987', whatsapp: true, email: 'fernando.almeida@email.com', ultimoAtendimento: '2025-01-08', totalAgendamentos: 7, status: 'ativo', observacoes: '', dataCadastro: '2024-09-11' },
+    { id: 9, nome: 'Camila Regina Dias', telefone: '(51) 98765-4320', whatsapp: false, email: 'camila.dias@email.com', ultimoAtendimento: '2024-10-28', totalAgendamentos: 3, status: 'inativo', observacoes: 'Solicitou cancelamento temporário.', dataCadastro: '2024-10-01' },
+    { id: 10, nome: 'Thiago Vinícius Moura', telefone: '(11) 94321-8765', whatsapp: true, email: 'thiago.moura@email.com', ultimoAtendimento: '2025-01-16', totalAgendamentos: 11, status: 'ativo', observacoes: 'Prefere atendimento aos sábados.', dataCadastro: '2024-07-07' },
+    { id: 11, nome: 'Larissa Gabriela Pinto', telefone: '(61) 99876-5431', whatsapp: true, email: 'larissa.pinto@email.com', ultimoAtendimento: '2025-01-14', totalAgendamentos: 9, status: 'ativo', observacoes: 'Tem intolerância a fragrâncias fortes.', dataCadastro: '2024-08-15' },
+    { id: 12, nome: 'Bruno Henrique Vargas', telefone: '(11) 93210-8764', whatsapp: false, email: 'bruno.vargas@email.com', ultimoAtendimento: '2025-01-19', totalAgendamentos: 22, status: 'ativo', observacoes: 'Sempre traz indicações de novos clientes.', dataCadastro: '2024-02-28' }
+  ];
+
+  const coresMap = {};
+  clientes.forEach((c, i) => { coresMap[c.id] = CORES_INICIAIS[i % CORES_INICIAIS.length]; });
+
+  function getIniciais(nome) {
+    return nome.split(' ').map(p => p[0]).slice(0, 2).join('').toUpperCase();
+  }
+
+  function formatarTelefone(telefone) {
+    const nums = telefone.replace(/\D/g, '');
+    if (nums.length === 11) return `(${nums.slice(0,2)}) ${nums.slice(2,7)}-${nums.slice(7)}`;
+    if (nums.length === 10) return `(${nums.slice(0,2)}) ${nums.slice(2,6)}-${nums.slice(6)}`;
+    return telefone;
+  }
+
+  function renderTabela(lista) {
+    const tbody = document.getElementById('tabela-clientes-body');
+    const vazio = document.getElementById('estado-vazio-clientes');
+
+    if (!lista || lista.length === 0) {
+      tbody.innerHTML = '';
+      vazio.classList.remove('hidden');
+      return;
+    }
+    vazio.classList.add('hidden');
+
+    tbody.innerHTML = lista.map(c => `
+      <tr onclick="clientes_abrirFicha(${c.id})" class="cursor-pointer hover:bg-marca-50/50 transition-colors duration-150 group">
+        <td class="px-5 py-3.5">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full ${coresMap[c.id]} flex items-center justify-center text-white text-xs font-bold shrink-0 shadow-sm">${getIniciais(c.nome)}</div>
+            <span class="font-medium text-gray-900 group-hover:text-marca-700 transition-colors">${c.nome}</span>
+          </div>
+        </td>
+        <td class="px-5 py-3.5 text-gray-600">${formatarTelefone(c.telefone)}</td>
+        <td class="px-5 py-3.5">
+          ${c.whatsapp
+            ? '<span class="inline-flex items-center gap-1.5 text-green-600 text-xs font-medium"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</span>`
+            : '<span class="text-gray-400 text-xs">—</span>'
+          }
+        </td>
+        <td class="px-5 py-3.5 text-gray-600">${dataBR(c.ultimoAtendimento)}</td>
+        <td class="px-5 py-3.5">
+          <span class="inline-flex items-center justify-center bg-gray-100 text-gray-700 font-semibold text-xs rounded-lg px-2.5 py-1">${c.totalAgendamentos}</span>
+        </td>
+        <td class="px-5 py-3.5">
+          ${c.status === 'ativo'
+            ? '<span class="badge bg-green-50 text-green-700 text-xs font-semibold px-2.5 py-1 rounded-full">Ativo</span>'
+            : '<span class="badge bg-gray-100 text-gray-500 text-xs font-semibold px-2.5 py-1 rounded-full">Inativo</span>'
+          }
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  window.clientes_buscar = function(termo) {
+    const filtroStatus = document.getElementById('filtro-status').value;
+    const t = termo.toLowerCase().trim();
+    const filtrados = clientes.filter(c => {
+      const matchNome = !t || c.nome.toLowerCase().includes(t);
+      const matchTel = !t || c.telefone.includes(t) || formatarTelefone(c.telefone).includes(t);
+      const matchStatus = filtroStatus === 'todos' || c.status === filtroStatus;
+      return (matchNome || matchTel) && matchStatus;
+    });
+    renderTabela(filtrados);
+  };
+
+  window.clientes_abrirFicha = function(id) {
+    const c = clientes.find(x => x.id === id);
+    if (!c) return;
+    const cor = coresMap[c.id];
+    const html = `
+      <div class="space-y-5">
+        <div class="flex items-center gap-4">
+          <div class="w-14 h-14 rounded-full ${cor} flex items-center justify-center text-white text-lg font-bold shadow-md">${getIniciais(c.nome)}</div>
+          <div>
+            <h3 class="font-bold text-lg text-gray-900">${c.nome}</h3>
+            <span class="inline-flex mt-1 ${c.status === 'ativo' ? 'badge bg-green-50 text-green-700' : 'badge bg-gray-100 text-gray-500'} text-xs font-semibold px-2.5 py-1 rounded-full">${c.status === 'ativo' ? 'Ativo' : 'Inativo'}</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="bg-gray-50 rounded-xl p-3.5">
+            <p class="text-xs text-gray-400 mb-1">Telefone</p>
+            <p class="text-sm font-medium text-gray-800">${formatarTelefone(c.telefone)}</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-3.5">
+            <p class="text-xs text-gray-400 mb-1">E-mail</p>
+            <p class="text-sm font-medium text-gray-800">${c.email}</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-3.5">
+            <p class="text-xs text-gray-400 mb-1">Último Atendimento</p>
+            <p class="text-sm font-medium text-gray-800">${dataBR(c.ultimoAtendimento)}</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-3.5">
+            <p class="text-xs text-gray-400 mb-1">Total de Agendamentos</p>
+            <p class="text-sm font-medium text-gray-800">${c.totalAgendamentos}</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-3.5">
+            <p class="text-xs text-gray-400 mb-1">WhatsApp</p>
+            <p class="text-sm font-medium text-gray-800">${c.whatsapp ? 'Sim' : 'Não'}</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-3.5">
+            <p class="text-xs text-gray-400 mb-1">Cadastro</p>
+            <p class="text-sm font-medium text-gray-800">${dataBR(c.dataCadastro)}</p>
+          </div>
+        </div>
+        ${c.observacoes ? `<div class="bg-amber-50 border border-amber-200 rounded-xl p-3.5"><p class="text-xs text-amber-600 mb-1">Observações</p><p class="text-sm text-gray-700">${c.observacoes}</p></div>` : ''}
+        <div class="flex gap-2 pt-2">
+          <button onclick="clientes_toggleStatus(${c.id}); fecharModal();" class="btn ${c.status === 'ativo' ? 'bg-gray-100 hover:bg-gray-200 text-gray-700' : 'bg-green-50 hover:bg-green-100 text-green-700'} font-medium px-4 py-2.5 rounded-xl text-sm transition-colors flex-1">
+            ${c.status === 'ativo' ? 'Desativar Cliente' : 'Ativar Cliente'}
+          </button>
+          ${c.whatsapp ? `<button onclick="clientes_enviarWhats(${c.id}); fecharModal();" class="btn bg-green-50 hover:bg-green-100 text-green-700 font-medium px-4 py-2.5 rounded-xl text-sm transition-colors flex-1 flex items-center justify-center gap-2"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Enviar WhatsApp</button>` : ''}
+        </div>
+      </div>
+    `;
+    abrirModal(html, 'Ficha do Cliente');
+  };
+
+  window.clientes_toggleStatus = function(id) {
+    const c = clientes.find(x => x.id === id);
+    if (!c) return;
+    c.status = c.status === 'ativo' ? 'inativo' : 'ativo';
+    clientes_buscar(document.getElementById('busca-clientes').value);
+    clientes_atualizarStats();
+    toast(c.status === 'ativo' ? 'Cliente reativado com sucesso' : 'Cliente desativado', 'ok');
+  };
+
+  window.clientes_enviarWhats = function(id) {
+    const c = clientes.find(x => x.id === id);
+    if (!c) return;
+    const nums = c.telefone.replace(/\D/g, '');
+    window.open('https://wa.me/55' + nums, '_blank');
+    toast('Abrindo conversa com ' + c.nome.split(' ')[0] + ' no WhatsApp', 'info');
+  };
+
+  window.clientes_salvar = function() {
+    const nome = document.getElementById('form-nome').value.trim();
+    const telefone = document.getElementById('form-telefone').value.trim();
+    const email = document.getElementById('form-email').value.trim();
+    const observacoes = document.getElementById('form-obs').value.trim();
+    const usaWhats = document.getElementById('form-whatsapp').checked;
+
+    if (!nome) { toast('Informe o nome completo', 'erro'); return; }
+    if (!telefone || telefone.length < 10) { toast('Informe um telefone válido', 'erro'); return; }
+
+    const novoId = Math.max(...clientes.map(c => c.id)) + 1;
+    const cor = CORES_INICIAIS[(novoId - 1) % CORES_INICIAIS.length];
+    clientes.unshift({
+      id: novoId, nome, telefone, whatsapp: usaWhats, email,
+      ultimoAtendimento: new Date().toISOString().split('T')[0],
+      totalAgendamentos: 0, status: 'ativo', observacoes,
+      dataCadastro: new Date().toISOString().split('T')[0]
+    });
+    coresMap[novoId] = cor;
+
+    fecharModal();
+    clientes_buscar(document.getElementById('busca-clientes').value);
+    clientes_atualizarStats();
+    toast('Cliente cadastrado com sucesso!', 'ok');
+  };
+
+  function clientes_atualizarStats() {
+    const total = clientes.length;
+    const ativos = clientes.filter(c => c.status === 'ativo').length;
+    const inativos = total - ativos;
+    const trintaDias = new Date();
+    trintaDias.setDate(trintaDias.getDate() - 30);
+    const novos = clientes.filter(c => new Date(c.dataCadastro) >= trintaDias).length;
+
+    document.getElementById('stat-total').textContent = total;
+    document.getElementById('stat-ativos').textContent = ativos;
+    document.getElementById('stat-inativos').textContent = inativos;
+    document.getElementById('stat-novos').textContent = novos;
+    document.getElementById('badge-total-clientes').textContent = total;
+  }
+
+  window.abrirModalClientes = function() {
+    const html = `
+      <form onsubmit="event.preventDefault(); clientes_salvar();" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Nome completo <span class="text-red-400">*</span></label>
+          <input id="form-nome" type="text" placeholder="Ex: Maria Fernanda Costa" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-marca-400 focus:ring-2 focus:ring-marca-100 outline-none transition-all text-sm" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Telefone <span class="text-red-400">*</span></label>
+          <input id="form-telefone" type="text" placeholder="(11) 98765-4321" oninput="this.value = this.value.replace(/[^\\d()\\s-]/g, '').slice(0, 16)" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-marca-400 focus:ring-2 focus:ring-marca-100 outline-none transition-all text-sm" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+          <input id="form-email" type="email" placeholder="cliente@email.com" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-marca-400 focus:ring-2 focus:ring-marca-100 outline-none transition-all text-sm" />
+        </div>
+        <div class="flex items-center gap-3">
+          <input id="form-whatsapp" type="checkbox" checked class="w-4 h-4 rounded border-gray-300 text-marca-600 focus:ring-marca-400 accent-marca-600" />
+          <label for="form-whatsapp" class="text-sm text-gray-700 cursor-pointer select-none">Receber notificações via WhatsApp</label>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Observações</label>
+          <textarea id="form-obs" rows="3" placeholder="Preferências, restrições ou informações relevantes..." class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-marca-400 focus:ring-2 focus:ring-marca-100 outline-none transition-all text-sm resize-none"></textarea>
+        </div>
+        <div class="flex gap-3 pt-2">
+          <button type="button" onclick="fecharModal()" class="btn bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-5 py-2.5 rounded-xl text-sm transition-colors flex-1">Cancelar</button>
+          <button type="submit" class="btn bg-marca-600 hover:bg-marca-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow-md active:scale-95 transition-all text-sm flex-1">Cadastrar Cliente</button>
+        </div>
+      </form>
+    `;
+    abrirModal(html, 'Novo Cliente');
+  };
+
+  window.clientes_init = function() {
+    clientes_atualizarStats();
+    renderTabela(clientes);
+    document.getElementById('busca-clientes').value = '';
+    document.getElementById('filtro-status').value = 'todos';
+  };
+})();
+</script>
+
     <!-- TELAS -->
         </div>
       </main>
