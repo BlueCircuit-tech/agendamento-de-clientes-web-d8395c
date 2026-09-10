@@ -2698,6 +2698,420 @@
       </script>
     </section>
 
+    <section data-tela="notificacoes" class="hidden">
+    <div class="fade-in max-w-7xl mx-auto px-6 py-8">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="font-display text-3xl font-bold text-gray-900">Notificações</h1>
+                <p class="text-gray-500 mt-1">Gerencie lembretes automáticos, histórico de mensagens e templates</p>
+            </div>
+            <button onclick="notificacoes_novoLembrete()" class="btn bg-marca-600 hover:bg-marca-700 text-white px-5 py-2.5 rounded-xl font-medium flex items-center gap-2 active:scale-95 transition-all shadow-sm hover:shadow-md">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                Novo Lembrete
+            </button>
+        </div>
+
+        <div class="grid grid-cols-4 gap-5 mb-8">
+            <div class="card bg-white rounded-xl p-5 border border-gray-100">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="w-10 h-10 rounded-lg bg-marca-50 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-marca-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM6 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0Zm12.5 3.5a8.963 8.963 0 0 1-2.121 2.121M19.5 12a8.963 8.963 0 0 1-2.121-2.121"/></svg>
+                    </div>
+                    <span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">+12%</span>
+                </div>
+                <p class="text-2xl font-bold text-gray-900">1.284</p>
+                <p class="text-sm text-gray-500">Enviadas este mês</p>
+            </div>
+            <div class="card bg-white rounded-xl p-5 border border-gray-100">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                    </div>
+                    <span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">99.2%</span>
+                </div>
+                <p class="text-2xl font-bold text-gray-900">1.273</p>
+                <p class="text-sm text-gray-500">Entregues</p>
+            </div>
+            <div class="card bg-white rounded-xl p-5 border border-gray-100">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+                    </div>
+                    <span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">87.5%</span>
+                </div>
+                <p class="text-2xl font-bold text-gray-900">1.123</p>
+                <p class="text-sm text-gray-500">Visualizadas</p>
+            </div>
+            <div class="card bg-white rounded-xl p-5 border border-gray-100">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                    </div>
+                </div>
+                <p class="text-2xl font-bold text-gray-900">45</p>
+                <p class="text-sm text-gray-500">Agendadas</p>
+            </div>
+        </div>
+
+        <div class="card bg-white rounded-xl border border-gray-100 mb-6 overflow-hidden">
+            <div class="flex items-center border-b border-gray-100">
+                <button onclick="notificacoes_aba('agendadas')" id="tab-agendadas" class="tab-btn active flex-1 px-6 py-4 text-sm font-semibold text-marca-700 border-b-2 border-marca-600 bg-marca-50/50 transition-all">
+                    <span class="flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                        Agendadas
+                    </span>
+                </button>
+                <button onclick="notificacoes_aba('enviadas')" id="tab-enviadas" class="tab-btn flex-1 px-6 py-4 text-sm font-semibold text-gray-500 border-b-2 border-transparent hover:text-gray-700 transition-all">
+                    <span class="flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Z"/></svg>
+                        Enviadas
+                    </span>
+                </button>
+                <button onclick="notificacoes_aba('configuracoes')" id="tab-configuracoes" class="tab-btn flex-1 px-6 py-4 text-sm font-semibold text-gray-500 border-b-2 border-transparent hover:text-gray-700 transition-all">
+                    <span class="flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003 1.008c-.253.255-.427.578-.477.941a3.741 3.741 0 0 1-.744 1.448c-.122.15-.276.293-.452.428a3.741 3.741 0 0 1-1.49.744c-.027.007-.054.014-.081.02-.36.077-.737.077-1.096 0a3.741 3.741 0 0 1-1.49-.744 3.56 3.56 0 0 1-.452-.428 3.741 3.741 0 0 1-.744-1.448c-.05-.363-.224-.686-.477-.941l-1.003-1.008a1.125 1.125 0 0 1-.26-1.431l1.296-2.247a1.125 1.125 0 0 1 1.37-.49l1.217.456c.355.133.75.072 1.075-.124.073-.044.146-.087.22-.127.332-.184.582-.496.645-.87l.213-1.281Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
+                        Configurações
+                    </span>
+                </button>
+            </div>
+
+            <div id="conteudo-agendadas" class="tab-conteudo p-6">
+                <div class="flex items-center justify-between mb-5">
+                    <p class="text-sm text-gray-500">Configure lembretes automáticos para reduzir faltas</p>
+                </div>
+                <div class="space-y-3" id="lista-lembretes"></div>
+            </div>
+
+            <div id="conteudo-enviadas" class="tab-conteudo hidden">
+                <div class="p-6 pb-4">
+                    <div class="relative max-w-md">
+                        <svg class="w-5 h-5 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
+                        <input type="text" id="busca-enviadas" oninput="notificacoes_buscarEnviadas(this.value)" placeholder="Buscar por cliente ou telefone..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-marca-500 focus:border-transparent transition-all">
+                    </div>
+                </div>
+                <div id="lista-enviadas" class="px-6 pb-6"></div>
+                <div id="estado-vazio-enviadas" class="hidden px-6 pb-10 text-center py-10">
+                    <div class="w-16 h-16 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-3">
+                        <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+                    </div>
+                    <p class="text-sm text-gray-500">Nenhuma notificação encontrada</p>
+                </div>
+            </div>
+
+            <div id="conteudo-configuracoes" class="tab-conteudo hidden">
+                <div class="p-6 space-y-5"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+const notificacoes_dados = {
+    lembretes: [
+        { id: 1, nome: 'Confirmação de agendamento', descricao: 'Envia mensagem 1 hora antes para confirmar presença', ativo: true, antecedencia: '1 hora', icone: 'check' },
+        { id: 2, nome: 'Lembrete prévio', descricao: 'Envia lembrete com detalhes do agendamento no dia anterior', ativo: true, antecedencia: '24 horas', icone: 'clock' },
+        { id: 3, nome: 'Lembrete rápido', descricao: 'Lembrete curto 2 horas antes do horário', ativo: false, antecedencia: '2 horas', icone: 'clock' },
+        { id: 4, nome: 'Follow-up pós-serviço', descricao: 'Pesquisa de satisfação 48h após o atendimento', ativo: true, antecedencia: '48 horas (pós)', icone: 'heart' },
+        { id: 5, nome: 'Reagendamento automático', descricao: 'Oferece reagendamento quando cliente não confirma em 30min', ativo: false, antecedencia: '30 min (sem confirmação)', icone: 'calendar' },
+    ],
+    enviadas: [
+        { id: 1, cliente: 'Ana Carolina Silva', telefone: '(11) 98765-4321', servico: 'Corte & Escova', data: '2026-01-18', horario: '14:00', tipo: 'Confirmação', status: 'lido', enviadoEm: '2026-01-18 13:00', mensagemPreview: 'Olá Ana, confirmamos seu horário...' },
+        { id: 2, cliente: 'Carlos Eduardo Mendes', telefone: '(11) 97654-3210', servico: 'Barba Terapêutica', data: '2026-01-18', horario: '15:30', tipo: 'Lembrete', status: 'entregue', enviadoEm: '2026-01-18 14:30', mensagemPreview: 'Carlos, lembramos do seu horário...' },
+        { id: 3, cliente: 'Fernanda Oliveira', telefone: '(21) 96543-2109', servico: 'Manicure em Gel', data: '2026-01-17', horario: '10:00', tipo: 'Confirmação', status: 'lido', enviadoEm: '2026-01-17 09:00', mensagemPreview: 'Fernanda, seu horário está confirmado...' },
+        { id: 4, cliente: 'Ricardo Souza Lima', telefone: '(11) 95432-1098', servico: 'Design de Sobrancelhas', data: '2026-01-17', horario: '16:00', tipo: 'Lembrete', status: 'entregue', enviadoEm: '2026-01-17 15:00', mensagemPreview: 'Ricardo, não esqueça do seu design...' },
+        { id: 5, cliente: 'Patricia Lima Costa', telefone: '(31) 94321-0987', servico: 'Massagem Relaxante', data: '2026-01-16', horario: '11:00', tipo: 'Cancelamento', status: 'entregue', enviadoEm: '2026-01-16 08:30', mensagemPreview: 'Patricia, informamos o cancelamento...' },
+        { id: 6, cliente: 'Lucas Ferreira', telefone: '(41) 93210-9876', servico: 'Corte Masculino', data: '2026-01-16', horario: '09:00', tipo: 'Confirmação', status: 'lido', enviadoEm: '2026-01-16 08:00', mensagemPreview: 'Lucas, confirmamos presença...' },
+        { id: 7, cliente: 'Mariana Costa', telefone: '(11) 92109-8765', servico: 'Progressiva', data: '2026-01-15', horario: '13:00', tipo: 'Lembrete', status: 'entregue', enviadoEm: '2026-01-15 12:00', mensagemPreview: 'Mariana, lembramos da progressiva...' },
+        { id: 8, cliente: 'Bruno Almeida Santos', telefone: '(71) 91098-7654', servico: 'Pedicure', data: '2026-01-15', horario: '15:00', tipo: 'Confirmação', status: 'lido', enviadoEm: '2026-01-15 14:00', mensagemPreview: 'Bruno, sua pedicure está marcada...' },
+    ],
+    templates: [
+        { id: 1, nome: 'Confirmação de agendamento', assunto: 'Confirmacao', conteudo: 'Olá {nome}! Confirmamos seu agendamento de {servico} para {data} às {horario}. Responda SIM para confirmar ou CANCELAR para reagendar. Te esperamos!', tipo: 'confirmacao' },
+        { id: 2, nome: 'Lembrete de consulta', assunto: 'Lembrete', conteudo: 'Oi {nome}! Lembramos que você tem {servico} agendado para amanhã, {data} às {horario}. Qualquer dúvida, é só chamar!', tipo: 'lembrete' },
+        { id: 3, nome: 'Cancelamento', assunto: 'Cancelamento', conteudo: 'Olá {nome}, informamos que seu agendamento de {servico} no dia {data} às {horario} foi cancelado. Para remarcar, acesse nosso site ou responda esta mensagem.', tipo: 'cancelamento' },
+        { id: 4, nome: 'Follow-up pós-serviço', assunto: 'Pesquisa', conteudo: 'Olá {nome}! Esperamos que tenha gostado do {servico} realizado em {data}. De 0 a 10, como você avalia nosso atendimento? Sua opinião é muito importante!', tipo: 'followup' },
+    ]
+};
+
+function notificacoes_getIconSVG(tipo, classe) {
+    const icones = {
+        check: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>',
+        clock: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>',
+        heart: '<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>',
+        calendar: '<path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/>'
+    };
+    return `<svg class="w-5 h-5 ${classe || ''}" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">${icones[tipo] || icones.clock}</svg>`;
+}
+
+function notificacoes_getIniciais(nome) {
+    const partes = nome.split(' ');
+    return partes.length >= 2 ? (partes[0][0] + partes[partes.length - 1][0]).toUpperCase() : nome.substring(0, 2).toUpperCase();
+}
+
+function notificacoes_getCorAvatar(nome) {
+    const cores = ['bg-rose-400', 'bg-blue-400', 'bg-emerald-400', 'bg-amber-400', 'bg-violet-400', 'bg-teal-400', 'bg-orange-400', 'bg-cyan-400'];
+    let hash = 0;
+    for (let i = 0; i < nome.length; i++) hash = nome.charCodeAt(i) + ((hash << 5) - hash);
+    return cores[Math.abs(hash) % cores.length];
+}
+
+function notificacoes_renderizarLembretes() {
+    const container = document.getElementById('lista-lembretes');
+    container.innerHTML = notificacoes_dados.lembretes.map(l => `
+        <div class="card bg-white rounded-xl p-5 border border-gray-100 hover:border-marca-200 transition-all">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="w-11 h-11 rounded-xl bg-marca-50 flex items-center justify-center text-marca-600 flex-shrink-0">
+                        ${notificacoes_getIconSVG(l.icone)}
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900 text-sm">${l.nome}</h3>
+                        <p class="text-xs text-gray-500 mt-0.5">${l.descricao}</p>
+                        <span class="inline-block mt-1.5 text-xs font-medium text-marca-700 bg-marca-50 px-2 py-0.5 rounded-full">${l.antecedencia}</span>
+                    </div>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
+                    <input type="checkbox" ${l.ativo ? 'checked' : ''} onchange="notificacoes_toggleLembrete(${l.id}, this.checked)" class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-marca-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-marca-600"></div>
+                </label>
+            </div>
+        </div>
+    `).join('');
+}
+
+function notificacoes_renderizarEnviadas(filtro) {
+    const container = document.getElementById('lista-enviadas');
+    const estadoVazio = document.getElementById('estado-vazio-enviadas');
+    const busca = (filtro || '').toLowerCase().trim();
+    let lista = notificacoes_dados.enviadas;
+    if (busca) {
+        lista = lista.filter(m => m.cliente.toLowerCase().includes(busca) || m.telefone.includes(busca) || m.servico.toLowerCase().includes(busca));
+    }
+    if (lista.length === 0) {
+        container.innerHTML = '';
+        estadoVazio.classList.remove('hidden');
+        return;
+    }
+    estadoVazio.classList.add('hidden');
+    container.innerHTML = `<div class="space-y-2.5">${lista.map(m => {
+        const statusConfig = {
+            lido: { label: 'Lido', classe: 'bg-blue-50 text-blue-700 border-blue-200', icone: '<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>' },
+            entregue: { label: 'Entregue', classe: 'bg-emerald-50 text-emerald-700 border-emerald-200', icone: '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>' }
+        };
+        const st = statusConfig[m.status] || statusConfig.entregue;
+        const tipoCor = { 'Confirmação': 'bg-marca-50 text-marca-700', 'Lembrete': 'bg-amber-50 text-amber-700', 'Cancelamento': 'bg-red-50 text-red-700', 'Follow-up': 'bg-purple-50 text-purple-700' };
+        const tipoClasse = tipoCor[m.tipo] || 'bg-gray-50 text-gray-700';
+        const avatarCor = notificacoes_getCorAvatar(m.cliente);
+        const iniciais = notificacoes_getIniciais(m.cliente);
+        return `
+        <div onclick="notificacoes_detalheEnviada(${m.id})" class="card bg-white rounded-xl p-4 border border-gray-100 hover:border-marca-200 hover:shadow-sm cursor-pointer transition-all group">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-full ${avatarCor} text-white flex items-center justify-center text-sm font-bold flex-shrink-0">${iniciais}</div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2">
+                        <h4 class="text-sm font-semibold text-gray-900 truncate">${m.cliente}</h4>
+                        <span class="badge ${tipoClasse} text-[11px] font-medium px-2 py-0.5 rounded-full flex-shrink-0">${m.tipo}</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-0.5">${m.servico} &middot; ${dataBR(m.data)} às ${m.horario}</p>
+                    <p class="text-xs text-gray-400 mt-0.5 truncate">${m.mensagemPreview}</p>
+                </div>
+                <div class="flex items-center gap-3 flex-shrink-0">
+                    <span class="badge ${st.classe} text-[11px] font-medium px-2 py-0.5 rounded-full flex items-center gap-1">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">${st.icone}</svg>
+                        ${st.label}
+                    </span>
+                    <svg class="w-4 h-4 text-gray-300 group-hover:text-marca-500 transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/></svg>
+                </div>
+            </div>
+        </div>`;
+    }).join('')}</div>`;
+}
+
+function notificacoes_renderizarTemplates() {
+    const container = document.querySelector('#conteudo-configuracoes .p-6');
+    const variaveis = ['{nome}', '{servico}', '{data}', '{horario}'];
+    const varCores = { '{nome}': 'bg-marca-100 text-marca-800', '{servico}': 'bg-emerald-100 text-emerald-800', '{data}': 'bg-amber-100 text-amber-800', '{horario}': 'bg-blue-100 text-blue-800' };
+    container.innerHTML = `<div class="flex items-center justify-between mb-2">
+        <h3 class="font-display font-semibold text-gray-900">Templates de Mensagem</h3>
+        <span class="text-xs text-gray-400">Clique nas variáveis para inserir</span>
+    </div>
+    <div class="grid gap-4">${notificacoes_dados.templates.map(t => `
+        <div class="card bg-gray-50 rounded-xl p-5 border border-gray-100">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-white flex items-center justify-center text-marca-600 border border-gray-100">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-gray-900">${t.nome}</h4>
+                        <span class="text-xs text-gray-400">Assunto: ${t.assunto}</span>
+                    </div>
+                </div>
+                <button onclick="notificacoes_salvarTemplate(${t.id})" class="btn bg-marca-600 hover:bg-marca-700 text-white px-4 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 active:scale-95 transition-all">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3.75H6.912a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661L2.177 20.118a2.25 2.25 0 0 0 2.036 2.957h13.742a2.25 2.25 0 0 0 2.036-2.957l-.073-3.28a2.25 2.25 0 0 0-.1-.661l-1.412-8.839A2.25 2.25 0 0 0 17.088 3.75H15M9 3.75V9m6-6v9m3-9v9m-6 4.5v.008h12V14.25"/></svg>
+                    Salvar
+                </button>
+            </div>
+            <textarea id="template-${t.id}" rows="3" class="w-full px-4 py-3 rounded-lg border border-gray-200 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-marca-500 focus:border-transparent resize-none transition-all font-body" placeholder="Digite o template da mensagem...">${t.conteudo}</textarea>
+            <div class="flex items-center gap-2 mt-3">
+                <span class="text-xs text-gray-400 mr-1">Variáveis:</span>
+                ${variaveis.map(v => `<button onclick="notificacoes_inserirVariavel(${t.id}, '${v}')" class="badge ${varCores[v]} text-xs font-medium px-2.5 py-1 rounded-lg hover:shadow-sm active:scale-95 transition-all cursor-pointer border-0">${v}</button>`).join('')}
+            </div>
+        </div>
+    `).join('')}</div>`;
+}
+
+function notificacoes_aba(aba) {
+    document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active', 'text-marca-700', 'border-marca-600', 'bg-marca-50/50');
+        b.classList.add('text-gray-500', 'border-transparent');
+    });
+    const btn = document.getElementById('tab-' + aba);
+    btn.classList.add('active', 'text-marca-700', 'border-marca-600', 'bg-marca-50/50');
+    btn.classList.remove('text-gray-500', 'border-transparent');
+    document.querySelectorAll('.tab-conteudo').forEach(c => c.classList.add('hidden'));
+    document.getElementById('conteudo-' + aba).classList.remove('hidden');
+    if (aba === 'enviadas') notificacoes_renderizarEnviadas();
+    if (aba === 'configuracoes') notificacoes_renderizarTemplates();
+}
+
+function notificacoes_toggleLembrete(id, ativo) {
+    const lembrete = notificacoes_dados.lembretes.find(l => l.id === id);
+    if (lembrete) {
+        lembrete.ativo = ativo;
+        const msg = ativo ? `Lembrete "${lembrete.nome}" ativado com sucesso.` : `Lembrete "${lembrete.nome}" desativado.`;
+        toast(msg, ativo ? 'ok' : 'info');
+        notificacoes_renderizarLembretes();
+    }
+}
+
+function notificacoes_novoLembrete() {
+    const html = `
+        <div class="p-6 space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Nome do lembrete</label>
+                <input type="text" id="novo-lembrete-nome" placeholder="Ex: Lembrete de retorno" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-marca-500 focus:border-transparent transition-all">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
+                <select id="novo-lembrete-tipo" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-marca-500 focus:border-transparent transition-all">
+                    <option value="Lembrete">Lembrete</option>
+                    <option value="Confirmação">Confirmação</option>
+                    <option value="Cancelamento">Cancelamento</option>
+                    <option value="Follow-up">Follow-up</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Antecedência</label>
+                <select id="novo-lembrete-antecedencia" class="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-marca-500 focus:border-transparent transition-all">
+                    <option value="1 hora">1 hora antes</option>
+                    <option value="2 horas">2 horas antes</option>
+                    <option value="24 horas">24 horas antes</option>
+                    <option value="48 horas (pós)">48h após atendimento</option>
+                </select>
+            </div>
+        </div>`;
+    abrirModal(html, 'Criar Novo Lembrete');
+    setTimeout(() => {
+        const btn = document.createElement('button');
+        btn.textContent = 'Criar Lembrete';
+        btn.className = 'btn bg-marca-600 hover:bg-marca-700 text-white px-6 py-2.5 rounded-xl font-medium active:scale-95 transition-all';
+        btn.onclick = function() {
+            const nome = document.getElementById('novo-lembrete-nome').value.trim();
+            const tipo = document.getElementById('novo-lembrete-tipo').value;
+            const antecedencia = document.getElementById('novo-lembrete-antecedencia').value;
+            if (!nome) { toast('Informe o nome do lembrete', 'erro'); return; }
+            const iconeMap = { 'Lembrete': 'clock', 'Confirmação': 'check', 'Cancelamento': 'calendar', 'Follow-up': 'heart' };
+            notificacoes_dados.lembretes.push({ id: Date.now(), nome, descricao: 'Lembrete personalizado', ativo: true, antecedencia, icone: iconeMap[tipo] || 'clock' });
+            fecharModal();
+            notificacoes_renderizarLembretes();
+            toast('Lembrete criado com sucesso!', 'ok');
+        };
+        document.querySelector('.modal-footer')?.appendChild(btn);
+    }, 50);
+}
+
+function notificacoes_buscarEnviadas(termo) {
+    notificacoes_renderizarEnviadas(termo);
+}
+
+function notificacoes_detalheEnviada(id) {
+    const msg = notificacoes_dados.enviadas.find(m => m.id === id);
+    if (!msg) return;
+    const statusConfig = {
+        lido: { label: 'Lido', classe: 'bg-blue-100 text-blue-700' },
+        entregue: { label: 'Entregue', classe: 'bg-emerald-100 text-emerald-700' }
+    };
+    const st = statusConfig[msg.status];
+    const avatarCor = notificacoes_getCorAvatar(msg.cliente);
+    const iniciais = notificacoes_getIniciais(msg.cliente);
+    const html = `
+        <div class="p-6">
+            <div class="flex items-center gap-4 mb-5">
+                <div class="w-14 h-14 rounded-full ${avatarCor} text-white flex items-center justify-center text-lg font-bold">${iniciais}</div>
+                <div>
+                    <h3 class="font-display font-bold text-gray-900 text-lg">${msg.cliente}</h3>
+                    <p class="text-sm text-gray-500">${msg.telefone}</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3 mb-4">
+                <div class="bg-gray-50 rounded-lg p-3"><p class="text-xs text-gray-400 mb-1">Serviço</p><p class="text-sm font-medium text-gray-900">${msg.servico}</p></div>
+                <div class="bg-gray-50 rounded-lg p-3"><p class="text-xs text-gray-400 mb-1">Data</p><p class="text-sm font-medium text-gray-900">${dataBR(msg.data)}</p></div>
+                <div class="bg-gray-50 rounded-lg p-3"><p class="text-xs text-gray-400 mb-1">Horário</p><p class="text-sm font-medium text-gray-900">${msg.horario}</p></div>
+                <div class="bg-gray-50 rounded-lg p-3"><p class="text-xs text-gray-400 mb-1">Status</p><span class="badge ${st.classe} text-xs font-medium px-2 py-0.5 rounded-full">${st.label}</span></div>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                <p class="text-xs text-gray-400 mb-1">Mensagem enviada</p>
+                <p class="text-sm text-gray-700">${msg.mensagemPreview}</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-3">
+                <p class="text-xs text-gray-400">Enviada em: ${msg.enviadoEm}</p>
+            </div>
+            <div class="flex gap-3 mt-5">
+                <button onclick="notificacoes_reenviar(${msg.id})" class="btn flex-1 bg-marca-600 hover:bg-marca-700 text-white py-2.5 rounded-xl text-sm font-medium active:scale-95 transition-all">
+                    Reenviar Mensagem
+                </button>
+                <button onclick="notificacoes_agendarFollowup(${msg.id})" class="btn flex-1 bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 py-2.5 rounded-xl text-sm font-medium active:scale-95 transition-all">
+                    Agendar Follow-up
+                </button>
+            </div>
+        </div>`;
+    abrirModal(html, 'Detalhes da Notificação');
+}
+
+function notificacoes_reenviar(id) {
+    const msg = notificacoes_dados.enviadas.find(m => m.id === id);
+    if (msg) { msg.status = 'entregue'; toast('Mensagem reenviada com sucesso!', 'ok'); notificacoes_renderizarEnviadas(); fecharModal(); }
+}
+
+function notificacoes_agendarFollowup(id) {
+    const msg = notificacoes_dados.enviadas.find(m => m.id === id);
+    if (msg) { toast(`Follow-up agendado para ${msg.cliente} em 48h.`, 'ok'); fecharModal(); }
+}
+
+function notificacoes_inserirVariavel(templateId, variavel) {
+    const textarea = document.getElementById('template-' + templateId);
+    if (!textarea) return;
+    const inicio = textarea.selectionStart;
+    const fim = textarea.selectionEnd;
+    const texto = textarea.value;
+    textarea.value = texto.substring(0, inicio) + variavel + texto.substring(fim);
+    textarea.selectionStart = textarea.selectionEnd = inicio + variavel.length;
+    textarea.focus();
+}
+
+function notificacoes_salvarTemplate(id) {
+    const textarea = document.getElementById('template-' + id);
+    const template = notificacoes_dados.templates.find(t => t.id === id);
+    if (template && textarea) { template.conteudo = textarea.value; toast('Template salvo com sucesso!', 'ok'); }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    notificacoes_renderizarLembretes();
+    notificacoes_renderizarEnviadas();
+    notificacoes_renderizarTemplates();
+});
+</script>
+
     <!-- TELAS -->
         </div>
       </main>
