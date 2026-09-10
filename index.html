@@ -236,7 +236,45 @@
       <!-- ── CONTENT ── -->
       <main class="flex-1 overflow-y-auto">
         <div class="p-8">
-          <!-- TELAS -->
+          <section data-tela="agendar-horario" class="hidden">
+      <div class="max-w-5xl mx-auto px-6 py-10">
+        <header class="mb-8">
+          <h1 class="font-display text-3xl font-bold text-gray-900">Agende seu horário</h1>
+          <p class="mt-1 text-gray-500 text-sm">Escolha o serviço e o profissional de sua preferência</p>
+        </header>
+
+        <div class="flex flex-col sm:flex-row gap-3 mb-8">
+          <div class="relative flex-1">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input id="ag-busca" type="text" placeholder="Buscar serviço..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-marca-500 focus:border-transparent transition">
+          </div>
+          <div class="relative">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            <select id="ag-profissional" class="pl-10 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-marca-500 cursor-pointer">
+              <option value="">Todos os profissionais</option>
+            </select>
+            <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </div>
+
+        <div id="ag-contador" class="text-xs text-gray-500 mb-4 font-body"></div>
+
+        <div id="ag-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+
+        <div id="ag-vazio" class="hidden text-center py-16">
+          <svg class="w-14 h-14 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <p class="text-gray-500 font-body">Nenhum serviço encontrado para essa busca.</p>
+          <p class="text-gray-400 text-sm mt-1 font-body">Tente outro termo ou limpe os filtros.</p>
+        </div>
+
+        <footer class="mt-10 pt-6 border-t border-gray-200 text-center">
+          <button onclick="agendar_horario_abrir_login()" class="inline-flex items-center gap-2 px-6 py-2.5 bg-marca-600 text-white rounded-xl text-sm font-semibold hover:bg-marca-700 active:scale-95 transition shadow-md shadow-marca-200">Já tenho conta</button>
+          <p class="text-gray-400 text-xs mt-2 font-body">Acesse para ver seus agendamentos e histórico</p>
+        </footer>
+      </div>
+    </section>
+
+    <!-- TELAS -->
         </div>
       </main>
     </div>
