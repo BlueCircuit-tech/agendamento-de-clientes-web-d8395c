@@ -897,6 +897,396 @@
   </div>
 </section>
 
+    <section data-tela="painel-administrativo" class="hidden">
+  <div class="fade-in">
+    <!-- Cabeçalho da tela -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+      <div>
+        <h1 class="font-display text-2xl font-bold text-gray-900">Painel Administrativo</h1>
+        <p class="text-gray-500 mt-1 text-sm">Visão geral do seu estabelecimento — <span id="painel_data_hoje"></span></p>
+      </div>
+      <div class="flex gap-3">
+        <button onclick="mostrarTela('servicos-e-horarios')" class="btn btn-primary active:scale-95 transition-transform flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          Novo Agendamento
+        </button>
+        <button onclick="mostrarTela('notificacoes')" class="btn btn-outline active:scale-95 transition-transform relative">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          <span class="hidden sm:inline ml-1">Notificações</span>
+          <span id="painel_badge_notif" class="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center">3</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Cards KPI -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="card !p-5 hover:shadow-lg transition-shadow cursor-default">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Agendamentos Hoje</span>
+          <div class="w-10 h-10 rounded-lg bg-marca-100 flex items-center justify-center">
+            <svg class="w-5 h-5 text-marca-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+        </div>
+        <p class="font-display text-3xl font-bold text-gray-900" id="painel_kpi_agendamentos">12</p>
+        <div class="flex items-center gap-1 mt-2">
+          <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+          <span class="text-xs font-medium text-green-600">+3</span>
+          <span class="text-xs text-gray-400">vs. ontem</span>
+        </div>
+      </div>
+
+      <div class="card !p-5 hover:shadow-lg transition-shadow cursor-default">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Taxa Comparecimento</span>
+          <div class="w-10 h-10 rounded-lg bg-emerald-100 flex items-center justify-center">
+            <svg class="w-5 h-5 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+        </div>
+        <p class="font-display text-3xl font-bold text-gray-900" id="painel_kpi_comparecimento">87%</p>
+        <div class="flex items-center gap-1 mt-2">
+          <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+          <span class="text-xs font-medium text-green-600">+5%</span>
+          <span class="text-xs text-gray-400">vs. semana anterior</span>
+        </div>
+      </div>
+
+      <div class="card !p-5 hover:shadow-lg transition-shadow cursor-default">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Receita do Mês</span>
+          <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center">
+            <svg class="w-5 h-5 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+        </div>
+        <p class="font-display text-3xl font-bold text-gray-900" id="painel_kpi_receita">R$ 18.420</p>
+        <div class="flex items-center gap-1 mt-2">
+          <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+          <span class="text-xs font-medium text-green-600">+12%</span>
+          <span class="text-xs text-gray-400">vs. mês anterior</span>
+        </div>
+      </div>
+
+      <div class="card !p-5 hover:shadow-lg transition-shadow cursor-default">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Clientes Ativos</span>
+          <div class="w-10 h-10 rounded-lg bg-sky-100 flex items-center justify-center">
+            <svg class="w-5 h-5 text-sky-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+        </div>
+        <p class="font-display text-3xl font-bold text-gray-900" id="painel_kpi_clientes">148</p>
+        <div class="flex items-center gap-1 mt-2">
+          <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+          <span class="text-xs font-medium text-green-600">+8</span>
+          <span class="text-xs text-gray-400">novos este mês</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Área principal: gráfico + timeline -->
+    <div class="grid grid-cols-1 xl:grid-cols-5 gap-6">
+
+      <!-- Gráfico de agendamentos por dia da semana -->
+      <div class="card !p-6 xl:col-span-3">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="font-display text-lg font-semibold text-gray-900">Agendamentos por Dia</h2>
+            <p class="text-xs text-gray-500 mt-0.5">Últimos 7 dias</p>
+          </div>
+          <div class="flex gap-1 bg-gray-100 rounded-lg p-0.5">
+            <button class="painel_grafico_aba px-3 py-1.5 text-xs font-medium rounded-md bg-white text-marca-700 shadow-sm transition-all" data-aba="semana" onclick="painel_administrativo_trocar_grafico('semana')">Semana</button>
+            <button class="painel_grafico_aba px-3 py-1.5 text-xs font-medium rounded-md text-gray-500 hover:text-gray-700 transition-all" data-aba="mes" onclick="painel_administrativo_trocar_grafico('mes')">Mês</button>
+          </div>
+        </div>
+        <div id="painel_grafico_container" class="w-full" style="height: 220px;">
+          <svg id="painel_grafico_svg" viewBox="0 0 600 220" class="w-full h-full" preserveAspectRatio="none">
+            <!-- Grid horizontal -->
+            <line x1="50" y1="20" x2="590" y2="20" stroke="#f0f0f0" stroke-width="1"/>
+            <line x1="50" y1="60" x2="590" y2="60" stroke="#f0f0f0" stroke-width="1"/>
+            <line x1="50" y1="100" x2="590" y2="100" stroke="#f0f0f0" stroke-width="1"/>
+            <line x1="50" y1="140" x2="590" y2="140" stroke="#f0f0f0" stroke-width="1"/>
+            <line x1="50" y1="180" x2="590" y2="180" stroke="#f0f0f0" stroke-width="1"/>
+            <!-- Labels Y -->
+            <text x="45" y="24" text-anchor="end" class="text-[10px]" fill="#9ca3af" font-size="9">20</text>
+            <text x="45" y="64" text-anchor="end" class="text-[10px]" fill="#9ca3af" font-size="9">15</text>
+            <text x="45" y="104" text-anchor="end" class="text-[10px]" fill="#9ca3af" font-size="9">10</text>
+            <text x="45" y="144" text-anchor="end" class="text-[10px]" fill="#9ca3af" font-size="9">5</text>
+            <text x="45" y="184" text-anchor="end" class="text-[10px]" fill="#9ca3af" font-size="9">0</text>
+            <!-- Área preenchida -->
+            <path d="M 90 160 L 90 80 L 155 60 L 220 95 L 285 40 L 350 70 L 415 25 L 480 55 L 545 45 L 545 180 L 90 180 Z" fill="rgba(37, 99, 235, 0.08)"/>
+            <!-- Linha do gráfico -->
+            <polyline points="90,80 155,60 220,95 285,40 350,70 415,25 480,55 545,45" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Pontos -->
+            <circle cx="90" cy="80" r="4" fill="#2563eb" stroke="white" stroke-width="2"/>
+            <circle cx="155" cy="60" r="4" fill="#2563eb" stroke="white" stroke-width="2"/>
+            <circle cx="220" cy="95" r="4" fill="#2563eb" stroke="white" stroke-width="2"/>
+            <circle cx="285" cy="40" r="5" fill="#2563eb" stroke="white" stroke-width="2.5"/>
+            <circle cx="350" cy="70" r="4" fill="#2563eb" stroke="white" stroke-width="2"/>
+            <circle cx="415" cy="25" r="5" fill="#2563eb" stroke="white" stroke-width="2.5"/>
+            <circle cx="480" cy="55" r="4" fill="#2563eb" stroke="white" stroke-width="2"/>
+            <circle cx="545" cy="45" r="4" fill="#2563eb" stroke="white" stroke-width="2"/>
+            <!-- Tooltip values -->
+            <text x="90" y="72" text-anchor="middle" class="text-[9px] font-semibold" fill="#2563eb" font-size="9">12</text>
+            <text x="155" y="52" text-anchor="middle" class="text-[9px] font-semibold" fill="#2563eb" font-size="9">14</text>
+            <text x="220" y="87" text-anchor="middle" class="text-[9px] font-semibold" fill="#2563eb" font-size="9">10</text>
+            <text x="285" y="32" text-anchor="middle" class="text-[9px] font-semibold" fill="#2563eb" font-size="9">18</text>
+            <text x="350" y="62" text-anchor="middle" class="text-[9px] font-semibold" fill="#2563eb" font-size="9">13</text>
+            <text x="415" y="17" text-anchor="middle" class="text-[9px] font-semibold" fill="#2563eb" font-size="9">20</text>
+            <text x="480" y="47" text-anchor="middle" class="text-[9px] font-semibold" fill="#2563eb" font-size="9">15</text>
+            <text x="545" y="37" text-anchor="middle" class="text-[9px] font-semibold" fill="#2563eb" font-size="9">16</text>
+            <!-- Labels X -->
+            <text x="90" y="200" text-anchor="middle" class="text-[10px]" fill="#9ca3af" font-size="9">Seg</text>
+            <text x="155" y="200" text-anchor="middle" class="text-[10px]" fill="#9ca3af" font-size="9">Ter</text>
+            <text x="220" y="200" text-anchor="middle" class="text-[10px]" fill="#9ca3af" font-size="9">Qua</text>
+            <text x="285" y="200" text-anchor="middle" class="text-[10px]" fill="#9ca3af" font-size="9">Qui</text>
+            <text x="350" y="200" text-anchor="middle" class="text-[10px]" fill="#9ca3af" font-size="9">Sex</text>
+            <text x="415" y="200" text-anchor="middle" class="text-[10px]" fill="#9ca3af" font-size="9">Sáb</text>
+            <text x="480" y="200" text-anchor="middle" class="text-[10px]" fill="#9ca3af" font-size="9">Dom</text>
+            <text x="545" y="200" text-anchor="middle" class="text-[10px]" fill="#9ca3af" font-size="9">Hoje</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Timeline dos próximos agendamentos -->
+      <div class="card !p-0 xl:col-span-2 overflow-hidden">
+        <div class="p-5 pb-3 border-b border-gray-100">
+          <div class="flex items-center justify-between mb-1">
+            <h2 class="font-display text-lg font-semibold text-gray-900">Próximos Hoje</h2>
+            <button onclick="mostrarTela('agenda-do-dia')" class="text-xs text-marca-600 hover:text-marca-800 font-medium transition-colors">
+              Ver todos →
+            </button>
+          </div>
+          <p class="text-xs text-gray-500">8 agendamentos restantes</p>
+        </div>
+        <div id="painel_timeline" class="p-4 max-h-[380px] overflow-y-auto">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Clientes recentes -->
+    <div class="card !p-6 mt-6">
+      <div class="flex items-center justify-between mb-5">
+        <div>
+          <h2 class="font-display text-lg font-semibold text-gray-900">Clientes Recentes</h2>
+          <p class="text-xs text-gray-500 mt-0.5">Últimos clientes atendidos</p>
+        </div>
+        <div class="flex gap-3">
+          <div class="relative">
+            <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" id="painel_busca_cliente" placeholder="Buscar cliente..." oninput="painel_administrativo_buscar_cliente()" class="pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-marca-500 focus:border-transparent outline-none transition-all w-64">
+          </div>
+          <button onclick="mostrarTela('clientes')" class="btn btn-outline text-sm active:scale-95 transition-transform">Ver Todos</button>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[700px]">
+          <thead>
+            <tr class="border-b border-gray-100">
+              <th class="text-left py-3 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Cliente</th>
+              <th class="text-left py-3 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Contato</th>
+              <th class="text-left py-3 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Último Serviço</th>
+              <th class="text-left py-3 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Última Visita</th>
+              <th class="text-left py-3 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Total Gasto</th>
+              <th class="text-center py-3 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+              <th class="text-center py-3 px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider w-12"></th>
+            </tr>
+          </thead>
+          <tbody id="painel_tabela_clientes">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+      <div id="painel_vazio_busca" class="hidden py-12 text-center">
+        <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <p class="text-sm text-gray-400">Nenhum cliente encontrado</p>
+        <p class="text-xs text-gray-300 mt-1">Tente outro termo de busca</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  'use strict';
+
+  const CORES = ['bg-marca-100 text-marca-700','bg-emerald-100 text-emerald-700','bg-amber-100 text-amber-700','bg-sky-100 text-sky-700','bg-purple-100 text-purple-700','bg-rose-100 text-rose-700','bg-teal-100 text-teal-700'];
+  const CORES_BADGE = { confirmado: 'bg-green-100 text-green-700', pendente: 'bg-amber-100 text-amber-700', concluido: 'bg-gray-100 text-gray-600', cancelado: 'bg-red-100 text-red-700' };
+
+  const agendamentos = [
+    { hora: '08:00', nome: 'Mariana Costa', servico: 'Corte + Escova', prof: 'Ana', status: 'concluido', cor: 0, tel: '(11) 98765-4321' },
+    { hora: '08:30', nome: 'Pedro Almeida', servico: 'Barba Completa', prof: 'Carlos', status: 'confirmado', cor: 1, tel: '(11) 91234-5678' },
+    { hora: '09:00', nome: 'Fernanda Lima', servico: 'Manicure', prof: 'Julia', status: 'confirmado', cor: 2, tel: '(11) 99876-5432' },
+    { hora: '09:30', nome: 'Roberto Santos', servico: 'Corte Masculino', prof: 'Carlos', status: 'pendente', cor: 3, tel: '(11) 92345-6789' },
+    { hora: '10:00', nome: 'Amanda Oliveira', servico: 'Penteado', prof: 'Ana', status: 'confirmado', cor: 4, tel: '(11) 93456-7890' },
+    { hora: '10:30', nome: 'Carlos Mendes', servico: 'Massagem Relaxante', prof: 'Lucas', status: 'pendente', cor: 5, tel: '(11) 94567-8901' },
+    { hora: '11:00', nome: 'Juliana Rocha', servico: 'Design de Sobrancelha', prof: 'Julia', status: 'confirmado', cor: 6, tel: '(11) 95678-9012' },
+    { hora: '11:30', nome: 'Lucas Ferreira', servico: 'Corte + Barba', prof: 'Carlos', status: 'pendente', cor: 0, tel: '(11) 96789-0123' },
+  ];
+
+  const clientes = [
+    { nome: 'Mariana Costa', servico: 'Corte + Escova', data: '15/01/2026', total: 180.00, vis: 12, cor: 0, tel: '(11) 98765-4321', email: 'mari@email.com' },
+    { nome: 'Pedro Almeida', servico: 'Barba Completa', data: '15/01/2026', total: 55.00, vis: 8, cor: 1, tel: '(11) 91234-5678', email: 'pedro@email.com' },
+    { nome: 'Fernanda Lima', servico: 'Manicure', data: '14/01/2026', total: 45.00, vis: 6, cor: 2, tel: '(11) 99876-5432', email: 'fer@email.com' },
+    { nome: 'Roberto Santos', servico: 'Corte Masculino', data: '14/01/2026', total: 40.00, vis: 4, cor: 3, tel: '(11) 92345-6789', email: 'beto@email.com' },
+    { nome: 'Amanda Oliveira', servico: 'Penteado', data: '13/01/2026', total: 120.00, vis: 15, cor: 4, tel: '(11) 93456-7890', email: 'amanda@email.com' },
+    { nome: 'Carlos Mendes', servico: 'Massagem Relaxante', data: '13/01/2026', total: 150.00, vis: 3, cor: 5, tel: '(11) 94567-8901', email: 'cmendes@email.com' },
+    { nome: 'Juliana Rocha', servico: 'Design de Sobrancelha', data: '12/01/2026', total: 35.00, vis: 9, cor: 6, tel: '(11) 95678-9012', email: 'ju@email.com' },
+    { nome: 'Lucas Ferreira', servico: 'Corte + Barba', data: '12/01/2026', total: 75.00, vis: 7, cor: 0, tel: '(11) 96789-0123', email: 'lucas@email.com' },
+  ];
+
+  function iniciais(nome) {
+    return nome.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+  }
+
+  function renderizarTimeline() {
+    const el = document.getElementById('painel_timeline');
+    if (!el) return;
+    el.innerHTML = agendamentos.map((a, i) => {
+      const badgeClass = CORES_BADGE[a.status] || CORES_BADGE.pendente;
+      const statusLabel = a.status.charAt(0).toUpperCase() + a.status.slice(1);
+      const acoes = a.status === 'pendente'
+        ? `<div class="flex gap-2 mt-3">
+             <button onclick="painel_administrativo_confirmar(${i})" class="text-xs bg-green-600 text-white px-3 py-1.5 rounded-md hover:bg-green-700 active:scale-95 transition-all font-medium">Confirmar</button>
+             <button onclick="painel_administrativo_cancelar(${i})" class="text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-md hover:bg-red-100 active:scale-95 transition-all font-medium">Cancelar</button>
+           </div>`
+        : '';
+      return `
+        <div class="flex gap-3 group cursor-pointer" onclick="painel_administrativo_abrir_detalhe(${i})">
+          <div class="flex flex-col items-center">
+            <div class="w-10 h-10 rounded-full ${CORES[a.cor]} flex items-center justify-center text-xs font-bold shrink-0 group-hover:ring-2 ring-marca-300 transition-all">${iniciais(a.nome)}</div>
+            ${i < agendamentos.length - 1 ? '<div class="w-px flex-1 bg-gray-200 mt-1 mb-1"></div>' : ''}
+          </div>
+          <div class="flex-1 min-w-0 pb-4">
+            <div class="flex items-start justify-between gap-2">
+              <div class="min-w-0">
+                <p class="text-sm font-semibold text-gray-900 truncate">${a.nome}</p>
+                <p class="text-xs text-gray-500">${a.servico} · ${a.prof}</p>
+              </div>
+              <div class="text-right shrink-0">
+                <span class="text-sm font-mono font-semibold text-gray-700">${a.hora}</span>
+              </div>
+            </div>
+            <span class="badge ${badgeClass} mt-1.5 inline-block">${statusLabel}</span>
+            ${acoes}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function renderizarClientes(lista) {
+    const tbody = document.getElementById('painel_tabela_clientes');
+    const vazio = document.getElementById('painel_vazio_busca');
+    if (!tbody) return;
+    if (lista.length === 0) {
+      tbody.innerHTML = '';
+      if (vazio) vazio.classList.remove('hidden');
+      return;
+    }
+    if (vazio) vazio.classList.add('hidden');
+    tbody.innerHTML = lista.map((c, i) => {
+      const statusLabel = c.vis >= 10 ? 'Fiel' : c.vis >= 5 ? 'Regular' : 'Novo';
+      const badge = c.vis >= 10 ? 'bg-green-100 text-green-700' : c.vis >= 5 ? 'bg-amber-100 text-amber-700' : 'bg-sky-100 text-sky-700';
+      return `
+        <tr class="border-b border-gray-50 hover:bg-gray-50 transition-colors cursor-pointer" onclick="painel_administrativo_ficha_cliente(${clientes.indexOf(c)})">
+          <td class="py-3 px-3">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full ${CORES[c.cor]} flex items-center justify-center text-xs font-bold shrink-0">${iniciais(c.nome)}</div>
+              <span class="text-sm font-medium text-gray-900">${c.nome}</span>
+            </div>
+          </td>
+          <td class="py-3 px-3 text-sm text-gray-600">${c.tel}</td>
+          <td class="py-3 px-3 text-sm text-gray-600">${c.servico}</td>
+          <td class="py-3 px-3 text-sm text-gray-600">${c.data}</td>
+          <td class="py-3 px-3 text-sm font-semibold text-gray-900">${brl(c.total)}</td>
+          <td class="py-3 px-3 text-center">
+            <span class="badge ${badge}">${statusLabel}</span>
+          </td>
+          <td class="py-3 px-3 text-center">
+            <svg class="w-4 h-4 text-gray-400 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </td>
+        </tr>`;
+    }).join('');
+  }
+
+  window.painel_administrativo_buscar_cliente = function() {
+    const termo = document.getElementById('painel_busca_cliente').value.toLowerCase().trim();
+    const filtrados = clientes.filter(c => c.nome.toLowerCase().includes(termo) || c.servico.toLowerCase().includes(termo));
+    renderizarClientes(filtrados);
+  };
+
+  window.painel_administrativo_confirmar = function(idx) {
+    agendamentos[idx].status = 'confirmado';
+    renderizarTimeline();
+    toast('Agendamento confirmado com sucesso!', 'ok');
+  };
+
+  window.painel_administrativo_cancelar = function(idx) {
+    agendamentos[idx].status = 'cancelado';
+    renderizarTimeline();
+    toast('Agendamento cancelado.', 'info');
+  };
+
+  window.painel_administrativo_abrir_detalhe = function(idx) {
+    const a = agendamentos[idx];
+    const badgeClass = CORES_BADGE[a.status] || CORES_BADGE.pendente;
+    const statusLabel = a.status.charAt(0).toUpperCase() + a.status.slice(1);
+    abrirModal(`
+      <div class="space-y-4">
+        <div class="flex items-center gap-4">
+          <div class="w-14 h-14 rounded-full ${CORES[a.cor]} flex items-center justify-center text-lg font-bold">${iniciais(a.nome)}</div>
+          <div>
+            <p class="font-display text-lg font-bold text-gray-900">${a.nome}</p>
+            <p class="text-sm text-gray-500">${a.servico} com ${a.prof}</p>
+          </div>
+        </div>
+        <div class="bg-gray-50 rounded-lg p-4 space-y-2">
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Horário</span><span class="font-medium">${a.hora}</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Profissional</span><span class="font-medium">${a.prof}</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Status</span><span class="badge ${badgeClass}">${statusLabel}</span></div>
+          <div class="flex justify-between text-sm"><span class="text-gray-500">Contato</span><span class="font-medium">${a.tel}</span></div>
+        </div>
+        ${a.status === 'pendente' ? `
+        <div class="flex gap-3 pt-2">
+          <button onclick="painel_administrativo_confirmar(${idx}); fecharModal();" class="flex-1 btn btn-primary active:scale-95 transition-transform text-center justify-center">Confirmar</button>
+          <button onclick="painel_administrativo_cancelar(${idx}); fecharModal();" class="flex-1 btn bg-red-50 text-red-600 hover:bg-red-100 active:scale-95 transition-transform text-center justify-center">Cancelar</button>
+        </div>` : ''}
+      </div>
+    `, 'Detalhes do Agendamento');
+  };
+
+  window.painel_administrativo_ficha_cliente = function(idx) {
+    const c = clientes[idx];
+    mostrarTela('ficha-do-cliente');
+  };
+
+  window.painel_administrativo_trocar_grafico = function(aba) {
+    document.querySelectorAll('.painel_grafico_aba').forEach(b => {
+      b.classList.remove('bg-white','text-marca-700','shadow-sm');
+      b.classList.add('text-gray-500');
+    });
+    const ativo = document.querySelector(`.painel_grafico_aba[data-aba="${aba}"]`);
+    if (ativo) {
+      ativo.classList.add('bg-white','text-marca-700','shadow-sm');
+      ativo.classList.remove('text-gray-500');
+    }
+  };
+
+  // Inicialização
+  function init() {
+    const hoje = new Date();
+    const elData = document.getElementById('painel_data_hoje');
+    if (elData) elData.textContent = hoje.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    renderizarTimeline();
+    renderizarClientes(clientes);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
     <!-- TELAS -->
         </div>
       </main>
