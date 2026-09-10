@@ -2329,6 +2329,375 @@
       })();
     </script>
 
+    <section data-tela="servicos-e-horarios" class="hidden">
+      <div class="max-w-6xl mx-auto space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="font-display text-2xl font-bold text-slate-900">Serviços e Horários</h1>
+            <p class="text-slate-500 mt-1 text-sm">Configure os serviços oferecidos, duração, preços, profissionais e grade de horários de atendimento.</p>
+          </div>
+          <button onclick="mostrarTela('notificacoes')" class="relative p-2.5 rounded-xl border border-slate-200 bg-white hover:border-marca-300 hover:shadow-sm transition-all duration-200 active:scale-95">
+            <svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            <span class="absolute -top-1 -right-1 w-4.5 h-4.5 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">2</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4">
+          <div class="card p-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-marca-100 flex items-center justify-center"><svg class="w-5 h-5 text-marca-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg></div>
+            <div><p class="text-xs text-slate-500">Serviços Ativos</p><p class="text-lg font-bold text-slate-900" id="contador-servicos">6</p></div>
+          </div>
+          <div class="card p-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center"><svg class="w-5 h-5 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+            <div><p class="text-xs text-slate-500">Horários/Dia</p><p class="text-lg font-bold text-slate-900">8</p></div>
+          </div>
+          <div class="card p-4 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center"><svg class="w-5 h-5 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg></div>
+            <div><p class="text-xs text-slate-500">Bloqueios Ativos</p><p class="text-lg font-bold text-slate-900" id="contador-bloqueios">2</p></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+            <div>
+              <h2 class="font-display font-semibold text-slate-900">Serviços</h2>
+              <p class="text-xs text-slate-500 mt-0.5">Gerencie os serviços oferecidos, duração, preço e profissionais</p>
+            </div>
+            <button onclick="servicos_e_horarios_abrirModalServico()" class="btn bg-marca-700 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-marca-800 transition-all duration-200 active:scale-95 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>Adicionar Serviço
+            </button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead><tr class="bg-slate-50 text-left">
+                <th class="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Serviço</th>
+                <th class="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Duração</th>
+                <th class="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Preço</th>
+                <th class="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Profissionais</th>
+                <th class="px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider text-right">Ações</th>
+              </tr></thead>
+              <tbody id="tabela-servicos" class="divide-y divide-slate-100">
+              </tbody>
+            </table>
+          </div>
+          <div id="servicos-vazio" class="hidden p-10 text-center">
+            <div class="w-14 h-14 mx-auto rounded-full bg-slate-100 flex items-center justify-center mb-3"><svg class="w-7 h-7 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg></div>
+            <p class="text-sm text-slate-500">Nenhum serviço cadastrado</p>
+            <p class="text-xs text-slate-400 mt-1">Clique em "Adicionar Serviço" para começar</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+            <div>
+              <h2 class="font-display font-semibold text-slate-900">Horários de Atendimento</h2>
+              <p class="text-xs text-slate-500 mt-0.5">Configure os dias e faixas horárias disponíveis para agendamento</p>
+            </div>
+            <button onclick="servicos_e_horarios_abrirModalHorario()" class="btn bg-marca-700 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-marca-800 transition-all duration-200 active:scale-95 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>Adicionar Faixa
+            </button>
+          </div>
+          <div id="grade-horarios" class="divide-y divide-slate-100"></div>
+        </div>
+
+        <div class="card">
+          <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+            <div>
+              <h2 class="font-display font-semibold text-slate-900">Bloqueios de Agenda</h2>
+              <p class="text-xs text-slate-500 mt-0.5">Datas e horários em que não haverá atendimento</p>
+            </div>
+            <button onclick="servicos_e_horarios_abrirModalBloqueio()" class="btn bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800 transition-all duration-200 active:scale-95 flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>Novo Bloqueio
+            </button>
+          </div>
+          <div id="lista-bloqueios" class="divide-y divide-slate-100"></div>
+          <div id="bloqueios-vazio" class="hidden p-10 text-center">
+            <div class="w-14 h-14 mx-auto rounded-full bg-slate-100 flex items-center justify-center mb-3"><svg class="w-7 h-7 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+            <p class="text-sm text-slate-500">Nenhum bloqueio cadastrado</p>
+            <p class="text-xs text-slate-400 mt-1">Os bloqueios impedem agendamentos nos períodos definidos</p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between p-4 bg-marca-50 rounded-xl border border-marca-100">
+          <p class="text-sm text-marca-800">As configurações são aplicadas automaticamente na tela de agendamento.</p>
+          <div class="flex gap-3">
+            <button onclick="mostrarTela('notificacoes')" class="btn bg-white border border-slate-200 text-slate-700 px-5 py-2.5 rounded-lg text-sm font-medium hover:border-slate-300 hover:shadow-sm transition-all duration-200 active:scale-95">Notificações</button>
+            <button onclick="servicos_e_horarios_salvar()" class="btn bg-marca-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-marca-800 transition-all duration-200 active:scale-95">Salvar Alterações</button>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const servicos_e_horarios_servicos = [
+          { id: 1, nome: 'Corte de Cabelo Feminino', duracao: 60, preco: 85.00, profissionais: ['Maria Oliveira'], cor: 'bg-rose-100 text-rose-700', ativo: true },
+          { id: 2, nome: 'Coloração Completa', duracao: 120, preco: 180.00, profissionais: ['Maria Oliveira', 'João Pedro'], cor: 'bg-amber-100 text-amber-700', ativo: true },
+          { id: 3, nome: 'Barba e Bigode', duracao: 30, preco: 45.00, profissionais: ['João Pedro'], cor: 'bg-slate-100 text-slate-700', ativo: true },
+          { id: 4, nome: 'Hidratação Capilar', duracao: 45, preco: 95.00, profissionais: ['Maria Oliveira'], cor: 'bg-emerald-100 text-emerald-700', ativo: true },
+          { id: 5, nome: 'Manicure e Pedicure', duracao: 90, preco: 120.00, profissionais: ['Ana Beatriz'], cor: 'bg-violet-100 text-violet-700', ativo: true },
+          { id: 6, nome: 'Maquiagem Social', duracao: 60, preco: 150.00, profissionais: ['Ana Beatriz', 'Maria Oliveira'], cor: 'bg-pink-100 text-pink-700', ativo: false }
+        ];
+
+        const servicos_e_horarios_grade = {
+          segunda: { nome: 'Segunda-feira', ativo: true, faixas: ['08:00–12:00', '14:00–18:00'] },
+          terca: { nome: 'Terça-feira', ativo: true, faixas: ['08:00–12:00', '14:00–18:00'] },
+          quarta: { nome: 'Quarta-feira', ativo: true, faixas: ['08:00–12:00', '14:00–18:00'] },
+          quinta: { nome: 'Quinta-feira', ativo: true, faixas: ['08:00–12:00', '14:00–18:00'] },
+          sexta: { nome: 'Sexta-feira', ativo: true, faixas: ['08:00–12:00', '14:00–19:00'] },
+          sabado: { nome: 'Sábado', ativo: true, faixas: ['09:00–13:00'] },
+          domingo: { nome: 'Domingo', ativo: false, faixas: [] }
+        };
+
+        const servicos_e_horarios_bloqueios = [
+          { id: 1, dataInicio: '2025-02-17', dataFim: '2025-02-17', horaInicio: '08:00', horaFim: '18:00', motivo: 'Feriado de Carnaval — Expediente fechado', cor: 'bg-red-100 text-red-700' },
+          { id: 2, dataInicio: '2025-03-03', dataFim: '2025-03-03', horaInicio: '', horaFim: '', motivo: 'Reunião de equipe — Agenda bloqueada o dia todo', cor: 'bg-amber-100 text-amber-700' }
+        ];
+
+        function servicos_e_horarios_inicializar() {
+          servicos_e_horarios_renderServicos();
+          servicos_e_horarios_renderGrade();
+          servicos_e_horarios_renderBloqueios();
+        }
+
+        function servicos_e_horarios_renderServicos() {
+          const tbody = document.getElementById('tabela-servicos');
+          const vazio = document.getElementById('servicos-vazio');
+          const ativos = servicos_e_horarios_servicos.filter(s => s.ativo);
+          document.getElementById('contador-servicos').textContent = ativos.length;
+          if (!servicos_e_horarios_servicos.length) { tbody.innerHTML = ''; vazio.classList.remove('hidden'); return; }
+          vazio.classList.add('hidden');
+          tbody.innerHTML = servicos_e_horarios_servicos.map(s => `
+            <tr class="hover:bg-slate-50 transition-colors duration-150 group">
+              <td class="px-5 py-3.5"><p class="font-medium text-slate-900 ${s.ativo ? '' : 'line-through text-slate-400'}">${s.nome}</p>${s.ativo ? '<span class="badge bg-green-100 text-green-700 text-[10px] px-2 py-0.5 rounded-full mt-1 inline-block">Ativo</span>' : '<span class="badge bg-slate-100 text-slate-500 text-[10px] px-2 py-0.5 rounded-full mt-1 inline-block">Inativo</span>'}</td>
+              <td class="px-5 py-3.5 text-slate-600">${s.duracao} min</td>
+              <td class="px-5 py-3.5 font-medium text-slate-900">${brl(s.preco)}</td>
+              <td class="px-5 py-3.5"><div class="flex flex-wrap gap-1">${s.profissionais.map(p => `<span class="badge ${s.cor} text-[11px] px-2 py-0.5 rounded-full font-medium">${p}</span>`).join('')}</div></td>
+              <td class="px-5 py-3.5 text-right">
+                <div class="flex items-center justify-end gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                  <button onclick="servicos_e_horarios_editarServico(${s.id})" class="p-1.5 rounded-lg hover:bg-marca-100 text-marca-700 transition-colors" title="Editar"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg></button>
+                  <button onclick="servicos_e_horarios_toggleServico(${s.id})" class="p-1.5 rounded-lg hover:bg-amber-100 text-amber-700 transition-colors" title="${s.ativo ? 'Desativar' : 'Ativar'}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg></button>
+                  <button onclick="servicos_e_horarios_excluirServico(${s.id})" class="p-1.5 rounded-lg hover:bg-red-100 text-red-700 transition-colors" title="Excluir"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button>
+                </div>
+              </td>
+            </tr>
+          `).join('');
+        }
+
+        function servicos_e_horarios_renderGrade() {
+          const container = document.getElementById('grade-horarios');
+          const diasOrdem = ['segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado', 'domingo'];
+          container.innerHTML = diasOrdem.map(dia => {
+            const d = servicos_e_horarios_grade[dia];
+            return `
+              <div class="p-4 flex items-center justify-between hover:bg-slate-50 transition-colors duration-150">
+                <div class="flex items-center gap-3">
+                  <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" ${d.ativo ? 'checked' : ''} onchange="servicos_e_horarios_toggleDia('${dia}', this.checked)" class="sr-only peer">
+                    <div class="w-10 h-5.5 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-marca-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-marca-600"></div>
+                  </label>
+                  <span class="font-medium text-slate-900 ${d.ativo ? '' : 'text-slate-400'}">${d.nome}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="flex flex-wrap gap-1.5">${d.ativo ? d.faixas.map((f, i) => `<span class="badge bg-marca-100 text-marca-700 text-xs px-2.5 py-1 rounded-md font-medium flex items-center gap-1">${f}<button onclick="servicos_e_horarios_removerFaixa('${dia}', ${i})" class="ml-0.5 hover:text-red-600 transition-colors"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg></button></span>`).join('') : '<span class="text-xs text-slate-400 italic">Dia inativo</span>'}</div>
+                  ${d.ativo ? `<button onclick="servicos_e_horarios_adicionarFaixa('${dia}')" class="p-1 rounded-md hover:bg-marca-100 text-marca-600 transition-colors" title="Adicionar faixa"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg></button>` : ''}
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+
+        function servicos_e_horarios_renderBloqueios() {
+          const container = document.getElementById('lista-bloqueios');
+          const vazio = document.getElementById('bloqueios-vazio');
+          document.getElementById('contador-bloqueios').textContent = servicos_e_horarios_bloqueios.length;
+          if (!servicos_e_horarios_bloqueios.length) { container.innerHTML = ''; vazio.classList.remove('hidden'); return; }
+          vazio.classList.add('hidden');
+          container.innerHTML = servicos_e_horarios_bloqueios.map(b => `
+            <div class="p-4 flex items-center justify-between hover:bg-slate-50 transition-colors duration-150 group">
+              <div class="flex items-center gap-4">
+                <div class="w-11 h-11 rounded-xl bg-slate-100 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-medium text-slate-900">${b.dataInicio === b.dataFim ? dataBR(b.dataInicio) : dataBR(b.dataInicio) + ' a ' + dataBR(b.dataFim)}</p>
+                  <p class="text-xs text-slate-500 mt-0.5">${b.horaInicio ? b.horaInicio + (b.horaFim ? ' – ' + b.horaFim : '') : 'Dia inteiro'} · ${b.motivo}</p>
+                </div>
+              </div>
+              <button onclick="servicos_e_horarios_removerBloqueio(${b.id})" class="p-2 rounded-lg hover:bg-red-100 text-red-600 opacity-50 group-hover:opacity-100 transition-all active:scale-95" title="Remover bloqueio">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+              </button>
+            </div>
+          `).join('');
+        }
+
+        function servicos_e_horarios_abrirModalServico(id) {
+          const s = id ? servicos_e_horarios_servicos.find(x => x.id === id) : null;
+          const titulo = s ? 'Editar Serviço' : 'Novo Serviço';
+          const profissionaisOpcoes = ['Maria Oliveira', 'João Pedro', 'Ana Beatriz', 'Carlos Lima'];
+          abrirModal(`
+            <form id="form-servico" onsubmit="event.preventDefault(); servicos_e_horarios_salvarServico(${id || 'null'})" class="space-y-4">
+              <div><label class="block text-sm font-medium text-slate-700 mb-1">Nome do Serviço</label><input type="text" id="f-servico-nome" value="${s ? s.nome : ''}" required class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-marca-500 focus:border-marca-500 outline-none transition" placeholder="Ex: Corte de Cabelo"></div>
+              <div class="grid grid-cols-2 gap-4">
+                <div><label class="block text-sm font-medium text-slate-700 mb-1">Duração (minutos)</label><input type="number" id="f-servico-duracao" value="${s ? s.duracao : ''}" required min="5" step="5" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-marca-500 focus:border-marca-500 outline-none transition" placeholder="60"></div>
+                <div><label class="block text-sm font-medium text-slate-700 mb-1">Preço (R$)</label><input type="text" id="f-servico-preco" value="${s ? s.preco.toFixed(2).replace('.', ',') : ''}" required class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-marca-500 focus:border-marca-500 outline-none transition" placeholder="0,00" oninput="this.value = this.value.replace(/[^\\d,]/g, ''); if(this.value.split(',').length > 2) this.value = this.value.split(',').slice(0,2).join(','); if(this.value.length > 9) this.value = this.value.slice(0,9);"></div>
+              </div>
+              <div><label class="block text-sm font-medium text-slate-700 mb-2">Profissionais</label><div class="flex flex-wrap gap-2">${profissionaisOpcoes.map(p => {
+                const sel = s && s.profissionais.includes(p);
+                return `<label class="cursor-pointer flex items-center gap-2 bg-slate-50 hover:bg-slate-100 rounded-lg px-3 py-2 transition-colors"><input type="checkbox" value="${p}" ${sel ? 'checked' : ''} class="w-4 h-4 text-marca-600 rounded border-slate-300 focus:ring-marca-500"><span class="text-sm text-slate-700">${p}</span></label>`;
+              }).join('')}</div></div>
+              <div class="flex justify-end gap-3 pt-2">
+                <button type="button" onclick="fecharModal()" class="btn border border-slate-200 text-slate-600 px-4 py-2 rounded-lg text-sm hover:bg-slate-50 transition-all active:scale-95">Cancelar</button>
+                <button type="submit" class="btn bg-marca-700 text-white px-4 py-2 rounded-lg text-sm hover:bg-marca-800 transition-all active:scale-95">Salvar</button>
+              </div>
+            </form>
+          `, titulo);
+        }
+
+        function servicos_e_horarios_editarServico(id) {
+          servicos_e_horarios_abrirModalServico(id);
+        }
+
+        function servicos_e_horarios_salvarServico(id) {
+          const nome = document.getElementById('f-servico-nome').value.trim();
+          const duracao = parseInt(document.getElementById('f-servico-duracao').value);
+          const precoStr = document.getElementById('f-servico-preco').value.replace('.', '').replace(',', '.');
+          const preco = parseFloat(precoStr);
+          const profs = [...document.querySelectorAll('#form-servico input[type="checkbox"]:checked')].map(c => c.value);
+          if (!nome || !duracao || isNaN(preco) || !profs.length) { toast('Preencha todos os campos obrigatórios.', 'erro'); return; }
+          const cores = ['bg-rose-100 text-rose-700', 'bg-amber-100 text-amber-700', 'bg-emerald-100 text-emerald-700', 'bg-violet-100 text-violet-700', 'bg-sky-100 text-sky-700', 'bg-pink-100 text-pink-700'];
+          if (id) {
+            const s = servicos_e_horarios_servicos.find(x => x.id === id);
+            if (s) { s.nome = nome; s.duracao = duracao; s.preco = preco; s.profissionais = profs; }
+          } else {
+            servicos_e_horarios_servicos.push({ id: Date.now(), nome, duracao, preco, profissionais: profs, cor: cores[servicos_e_horarios_servicos.length % cores.length], ativo: true });
+          }
+          servicos_e_horarios_renderServicos();
+          fecharModal();
+          toast(id ? 'Serviço atualizado com sucesso!' : 'Serviço adicionado com sucesso!', 'ok');
+        }
+
+        function servicos_e_horarios_toggleServico(id) {
+          const s = servicos_e_horarios_servicos.find(x => x.id === id);
+          if (s) { s.ativo = !s.ativo; servicos_e_horarios_renderServicos(); toast(s.ativo ? 'Serviço ativado.' : 'Serviço desativado.', 'info'); }
+        }
+
+        function servicos_e_horarios_excluirServico(id) {
+          abrirModal(`
+            <p class="text-sm text-slate-600 mb-5">Tem certeza que deseja excluir este serviço? Esta ação não pode ser desfeita.</p>
+            <div class="flex justify-end gap-3">
+              <button onclick="fecharModal()" class="btn border border-slate-200 text-slate-600 px-4 py-2 rounded-lg text-sm hover:bg-slate-50 transition-all active:scale-95">Cancelar</button>
+              <button onclick="servicos_e_horarios_confirmarExclusaoServico(${id})" class="btn bg-red-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-700 transition-all active:scale-95">Excluir</button>
+            </div>
+          `, 'Confirmar Exclusão');
+        }
+
+        function servicos_e_horarios_confirmarExclusaoServico(id) {
+          const idx = servicos_e_horarios_servicos.findIndex(s => s.id === id);
+          if (idx >= 0) { servicos_e_horarios_servicos.splice(idx, 1); servicos_e_horarios_renderServicos(); }
+          fecharModal();
+          toast('Serviço excluído.', 'info');
+        }
+
+        function servicos_e_horarios_toggleDia(dia, ativo) {
+          servicos_e_horarios_grade[dia].ativo = ativo;
+          if (!ativo) servicos_e_horarios_grade[dia].faixas = [];
+          servicos_e_horarios_renderGrade();
+          toast(servicos_e_horarios_grade[dia].nome + (ativo ? ' ativado.' : ' desativado.'), 'info');
+        }
+
+        function servicos_e_horarios_adicionarFaixa(dia) {
+          abrirModal(`
+            <form onsubmit="event.preventDefault(); servicos_e_horarios_salvarFaixa('${dia}')" class="space-y-4">
+              <div class="grid grid-cols-2 gap-4">
+                <div><label class="block text-sm font-medium text-slate-700 mb-1">De</label><input type="time" id="f-faixa-inicio" required class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-marca-500 focus:border-marca-500 outline-none transition"></div>
+                <div><label class="block text-sm font-medium text-slate-700 mb-1">Até</label><input type="time" id="f-faixa-fim" required class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-marca-500 focus:border-marca-500 outline-none transition"></div>
+              </div>
+              <div class="flex justify-end gap-3 pt-2">
+                <button type="button" onclick="fecharModal()" class="btn border border-slate-200 text-slate-600 px-4 py-2 rounded-lg text-sm hover:bg-slate-50 transition-all active:scale-95">Cancelar</button>
+                <button type="submit" class="btn bg-marca-700 text-white px-4 py-2 rounded-lg text-sm hover:bg-marca-800 transition-all active:scale-95">Adicionar</button>
+              </div>
+            </form>
+          `, 'Adicionar Faixa de Horário');
+        }
+
+        function servicos_e_horarios_salvarFaixa(dia) {
+          const inicio = document.getElementById('f-faixa-inicio').value;
+          const fim = document.getElementById('f-faixa-fim').value;
+          if (inicio >= fim) { toast('Horário de início deve ser anterior ao fim.', 'erro'); return; }
+          const faixa = inicio + '–' + fim;
+          if (servicos_e_horarios_grade[dia].faixas.includes(faixa)) { toast('Esta faixa já existe.', 'erro'); return; }
+          servicos_e_horarios_grade[dia].faixas.push(faixa);
+          servicos_e_horarios_grade[dia].faixas.sort();
+          servicos_e_horarios_renderGrade();
+          fecharModal();
+          toast('Faixa adicionada para ' + servicos_e_horarios_grade[dia].nome + '.', 'ok');
+        }
+
+        function servicos_e_horarios_removerFaixa(dia, idx) {
+          servicos_e_horarios_grade[dia].faixas.splice(idx, 1);
+          servicos_e_horarios_renderGrade();
+          toast('Faixa removida.', 'info');
+        }
+
+        function servicos_e_horarios_abrirModalBloqueio() {
+          const hoje = new Date().toISOString().slice(0, 10);
+          abrirModal(`
+            <form onsubmit="event.preventDefault(); servicos_e_horarios_salvarBloqueio()" class="space-y-4">
+              <div class="grid grid-cols-2 gap-4">
+                <div><label class="block text-sm font-medium text-slate-700 mb-1">Data Início</label><input type="date" id="f-bloq-inicio" value="${hoje}" required class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-marca-500 focus:border-marca-500 outline-none transition"></div>
+                <div><label class="block text-sm font-medium text-slate-700 mb-1">Data Fim</label><input type="date" id="f-bloq-fim" value="${hoje}" required class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-marca-500 focus:border-marca-500 outline-none transition"></div>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div><label class="block text-sm font-medium text-slate-700 mb-1">Horário Início</label><input type="time" id="f-bloq-hinicio" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-marca-500 focus:border-marca-500 outline-none transition"></div>
+                <div><label class="block text-sm font-medium text-slate-700 mb-1">Horário Fim</label><input type="time" id="f-bloq-hfim" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-marca-500 focus:border-marca-500 outline-none transition"></div>
+              </div>
+              <div><label class="block text-sm font-medium text-slate-700 mb-1">Motivo</label><input type="text" id="f-bloq-motivo" required class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-marca-500 focus:border-marca-500 outline-none transition" placeholder="Ex: Feriado, reunião de equipe..."></div>
+              <div class="flex justify-end gap-3 pt-2">
+                <button type="button" onclick="fecharModal()" class="btn border border-slate-200 text-slate-600 px-4 py-2 rounded-lg text-sm hover:bg-slate-50 transition-all active:scale-95">Cancelar</button>
+                <button type="submit" class="btn bg-marca-700 text-white px-4 py-2 rounded-lg text-sm hover:bg-marca-800 transition-all active:scale-95">Salvar Bloqueio</button>
+              </div>
+            </form>
+          `, 'Novo Bloqueio de Agenda');
+        }
+
+        function servicos_e_horarios_salvarBloqueio() {
+          const di = document.getElementById('f-bloq-inicio').value;
+          const df = document.getElementById('f-bloq-fim').value;
+          const hi = document.getElementById('f-bloq-hinicio').value;
+          const hf = document.getElementById('f-bloq-hfim').value;
+          const motivo = document.getElementById('f-bloq-motivo').value.trim();
+          if (new Date(di) > new Date(df)) { toast('Data de início não pode ser após a data fim.', 'erro'); return; }
+          if (hi && hf && hi >= hf) { toast('Horário de início deve ser anterior ao fim.', 'erro'); return; }
+          servicos_e_horarios_bloqueios.push({ id: Date.now(), dataInicio: di, dataFim: df, horaInicio: hi, horaFim: hf, motivo, cor: 'bg-red-100 text-red-700' });
+          servicos_e_horarios_renderBloqueios();
+          fecharModal();
+          toast('Bloqueio adicionado com sucesso!', 'ok');
+        }
+
+        function servicos_e_horarios_removerBloqueio(id) {
+          abrirModal(`
+            <p class="text-sm text-slate-600 mb-5">Deseja remover este bloqueio? Os horários ficarão disponíveis novamente para agendamento.</p>
+            <div class="flex justify-end gap-3">
+              <button onclick="fecharModal()" class="btn border border-slate-200 text-slate-600 px-4 py-2 rounded-lg text-sm hover:bg-slate-50 transition-all active:scale-95">Cancelar</button>
+              <button onclick="servicos_e_horarios_confirmarRemocaoBloqueio(${id})" class="btn bg-red-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-700 transition-all active:scale-95">Remover</button>
+            </div>
+          `, 'Remover Bloqueio');
+        }
+
+        function servicos_e_horarios_confirmarRemocaoBloqueio(id) {
+          const idx = servicos_e_horarios_bloqueios.findIndex(b => b.id === id);
+          if (idx >= 0) { servicos_e_horarios_bloqueios.splice(idx, 1); servicos_e_horarios_renderBloqueios(); }
+          fecharModal();
+          toast('Bloqueio removido.', 'info');
+        }
+
+        function servicos_e_horarios_salvar() {
+          toast('Configurações salvas com sucesso!', 'ok');
+        }
+
+        document.addEventListener('DOMContentLoaded', servicos_e_horarios_inicializar);
+      </script>
+    </section>
+
     <!-- TELAS -->
         </div>
       </main>
